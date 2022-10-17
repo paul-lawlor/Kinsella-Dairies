@@ -1,8 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./Pages/Layout";
+import Home from "./Pages/Home";
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
+import Account from "./Pages/Account";
+import Rewards from "./Pages/Rewards";
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+
+export default function App() {
+  return (
+
+<BrowserRouter>
+<Routes>
+    <Route path="/" element={<Layout />} >
+      <Route path="/home" element = {<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="rewards" element={<Rewards />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="accounts" element={<Account />} />
+    </Route>
+</Routes>
+</BrowserRouter>
+  );
+  }
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
