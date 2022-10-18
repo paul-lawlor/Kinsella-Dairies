@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -18,6 +19,7 @@ public class Orders {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name = "orderID")
         private Long orderID;
 
         @Column(name = "totalPrice")
@@ -27,6 +29,9 @@ public class Orders {
         @JoinColumn(name = "userID", referencedColumnName = "userID")
         private Accounts userID;
 
+        @OneToMany
+        @JoinColumn(name = "orderID")
+        private List<OrderProduct> productOrderID;
 
     
 }

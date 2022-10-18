@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @Entity
@@ -17,6 +18,7 @@ public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "productID")
     private Long productID;
 
     @Column(name = "productName")
@@ -24,6 +26,11 @@ public class Products {
 
     @Column (name = "price")
     private Integer price;
+
+    @OneToMany
+    @JoinColumn(name = "productID")
+    private List<OrderProduct> orderProductID;
+
 
 
 }

@@ -16,7 +16,9 @@ public class Accounts{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userID")
     private Long userID;
+
     @Column(name = "firstName")
     private String firstName;
     

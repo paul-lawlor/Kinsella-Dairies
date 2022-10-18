@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orderProduct")
@@ -15,12 +16,17 @@ import java.util.Date;
 @Data
 public class OrderProduct {
 
-    @OneToMany
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "orderProductID")
+    private Long orderProductID;
+
+    @ManyToOne
+    @JoinColumn(name = "orderID")
     private Orders orderID;
 
-    @OneToMany
-    @JoinColumn(name = "productID", referencedColumnName = "productID")
+    @ManyToOne
+    @JoinColumn(name = "productID")
     private Products productID;
 
     @Column(name = "quantity")
