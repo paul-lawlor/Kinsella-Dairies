@@ -60,24 +60,7 @@ const Signup = () => {
                         />
                     </div>
 
-                    <div className="d-flex">
-                        <div className="mb-1 mx-1">
-                            <label> City </label>
-                            <input
-                            type = "text"
-                            className="form-control"
-                            placeholder="Enter City"
-                            />
-                        </div>
-                        <div className="mb-1 mx-1">
-                            <label> Country </label>
-                            <input
-                            type = "text"
-                            className="form-control"
-                            placeholder="Enter Country"
-                            />
-                        </div>
-                    </div>
+                    
 
                     {/* Postcode */}
                     <div className="input-small mb-4 mx-1">

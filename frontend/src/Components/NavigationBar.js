@@ -27,8 +27,9 @@ export function NavigationBar() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
-                        <Nav.Link href="/Rewards">Rewards</Nav.Link>
+                        <Nav.Link href="/shop">Shop</Nav.Link>
                         <Nav.Link href="/Accounts">Account</Nav.Link>
+                        <Nav.Link href="/Basket">Basket</Nav.Link>
 
                         </Nav>
                     <Nav>
