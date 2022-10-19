@@ -29,14 +29,14 @@ const Signup = () => {
                         </div>
                     </div>
 
-                    {/* Phone */}
+                    {/* Email */}
 
                     <div className="input-medium mb-4 mx-1">
-                        <label>Phone Number</label>
+                        <label>Email Address</label>
                         <input
-                            type="text"
+                            type="email"
                             className="form-control"
-                            placeholder="Enter phone number"
+                            placeholder="Enter email"
                         />
                     </div>
                     
@@ -60,7 +60,6 @@ const Signup = () => {
                         />
                     </div>
 
-                    
 
                     {/* Postcode */}
                     <div className="input-small mb-4 mx-1">
@@ -91,16 +90,6 @@ const Signup = () => {
                         /> 
                     </div>
 
-                    {/* Referral Code */}
-
-                    <div className="mb-5 mx-1 input-medium">
-                        <label>Referral Code (Optional)</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            placeholder="Enter Referral Code"
-                        /> 
-                    </div>
 
                     <div className="d-grid">
                     <button type="submit" className="btn btn-primary">

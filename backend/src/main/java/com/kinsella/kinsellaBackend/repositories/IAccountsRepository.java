@@ -7,13 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.metamodel.SingularAttribute;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 
 public interface AccountsRepository extends JpaRepository<Accounts, Integer>{
-    List<Accounts> findAllById(Long id);
-
-    List<Accounts> findById(Long id);
-
-    List<Accounts> findByFirstName(String firstName);
+    Collection<Accounts> findByUserID(Long userID);
 }
