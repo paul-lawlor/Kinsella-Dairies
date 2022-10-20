@@ -1,60 +1,47 @@
-import React from 'react';
+import React from "react";
 import ShopService from "../Services/ShopService";
 
 class ProductList extends React.Component {
+  constructor(props) {
+    // eslint-disable-next-line no-this-before-super
+    super(props);
+    this.state = {
+      products: [],
+    };
+  }
 
-    constructor(){
-        // eslint-disable-next-line no-this-before-super
-        this.state = {
-            products:[]
-        }
-    }
+  componentDidMount() {
+    ShopService.getProducts().then((response) => {
+      this.setState({ products: response.data });
+    });
+  }
 
-    componentDidMount(){
-        ShopService.getProducts().then((response) => {
-            this.setState({products: response.data})
-        });
-    }
-
-render (){
+  render() {
     return (
-        <div>
-            <h1 className= "text-center"> products </h1>
-            <table className = "table table-striped">
-            <thead>
+      <div className="row">
+        <h1 className="text-center"> Products </h1>
+        <table className="table ">
+          <thead>
             <tr>
-                <td>Product Id</td>
-                <td>Product Name</td>
-                <td>Product Price</td>
+              <td>Product Id</td>
+              <td>Product Name</td>
+              <td>Product Price</td>
             </tr>
-            
-            
-            </thead>
-            <tbody>
-                {
-                    this.state.users.map(
-                        products =>
-                        <tr key = {products.productID}>
-                            <td> {products.productID}</td>
-                            <td> {products.productName}</td>
-                            <td> {products.price}</td>
-                            </tr>
-                    )
-                }
-            </tbody>
-            
-            
-            </table>
-        
-        
-        </div>
-    )
-
-
-
-
+          </thead>
+          <tbody>
+            {this.state.products?.map((products) => (
+              <tr key={products.productID}>
+                <td> {products.productID}</td>
+                <td> {products.productName}</td>
+                <td> £{products.price}</td>
+                <button>Add to Cart</button>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
 
-}
-
-export default ProductList
+export default ProductList;

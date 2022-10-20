@@ -1,6 +1,5 @@
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 function WelcomeTabs() {
   return (
@@ -10,12 +9,9 @@ function WelcomeTabs() {
       className="mb-3"
       fill
     >
-      <Tab eventKey="stamps" title="Stamp Collection">
-      </Tab>
-      <Tab eventKey="lifetimeRewards" title="Lifetime Rewards">
-      </Tab>
-      <Tab eventKey="referal" title="Referal Bonus">
-      </Tab>
+      <Tab eventKey="stamps" title="Stamp Collection"></Tab>
+      <Tab eventKey="lifetimeRewards" title="Lifetime Rewards"></Tab>
+      <Tab eventKey="referal" title="Referal Bonus"></Tab>
     </Tabs>
   );
 }

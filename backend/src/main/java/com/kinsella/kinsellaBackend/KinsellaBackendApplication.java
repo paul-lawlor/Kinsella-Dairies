@@ -23,7 +23,7 @@ public class KinsellaBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-	this.productsRepository.save(new Products(1L, "1 pint skimmed milk",  1.30));
+	this.productsRepository.save(new Products(1L, "1 pint skimmed milk", 1.30));
 	this.productsRepository.save(new Products(2L, "1 pint whole milk (glass)", 1.30));
 	this.productsRepository.save(new Products(3L, "1 pint skimmed milk organic (glass)", 1.80));
 	this.productsRepository.save(new Products(4L, "1 pint whole milk organic (glass)", 1.80));

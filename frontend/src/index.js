@@ -1,38 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Account from "./Pages/Account";
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Shop from './Pages/Shop';
-import Basket from './Pages/Basket';
-
+import Shop from "./Pages/Shop";
+import ProductList from "./Components/ProductList";
 
 export default function App() {
   return (
-
-<BrowserRouter>
-<Routes>
-    <Route path="/" element={<Layout />} >
-      <Route path="/home" element = {<Home />} />
-      <Route path="login" element={<Login />} />
-      <Route path="shop" element={<Shop />} />
-      <Route path="signup" element={<Signup />} />
-      <Route path="basket" element={<Basket />} />
-      <Route path="accounts" element={<Account />} />
-    </Route>
-</Routes>
-</BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="accounts" element={<Account />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-  }
+}
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />

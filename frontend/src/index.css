@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col-1{
+  flex:1
+}
+
+.col-2{
+  flex:2
+}
+/* styling of products / basket */
+.block{
+  background-color: #e0e0e0;
+  padding:1rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+
+}
+
+.row.center{
+  align-items: center;
+}
+
+.cart{
+  justify-content: flex-end;
+}
+
+.basket{
+  display: flex;
+  flex-wrap: wrap;
+}
