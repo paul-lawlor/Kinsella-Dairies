@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.List;
 
 
 @Entity
@@ -25,12 +23,9 @@ public class Products {
     private String productName;
 
     @Column (name = "price")
-    private Integer price;
-
-    @OneToMany
-    @JoinColumn(name = "productID")
-    private List<OrderProduct> orderProductID;
+    private Double price;
 
 
-
+//    public Products(String s, double v) {
+//    }
 }

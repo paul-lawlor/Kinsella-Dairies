@@ -1,7 +1,14 @@
+import ProductList from "../Components/ProductList"
+
+
+
+
 export default function Shop() {
     return (
         <>
-        <p> Shop</p>
+        
+        <h1> shop </h1>
+    
         </>
     )
 };

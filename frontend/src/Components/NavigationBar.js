@@ -28,8 +28,8 @@ export function NavigationBar() {
                     <Nav className="me-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/shop">Shop</Nav.Link>
-                        <Nav.Link href="/Accounts">Account</Nav.Link>
-                        <Nav.Link href="/Basket">Basket</Nav.Link>
+                        <Nav.Link href="/accounts">Account</Nav.Link>
+                        <Nav.Link href="/basket">Basket</Nav.Link>
 
                         </Nav>
                     <Nav>

@@ -23,8 +23,8 @@ export default function App() {
       <Route path="login" element={<Login />} />
       <Route path="shop" element={<Shop />} />
       <Route path="signup" element={<Signup />} />
-      <Route path="accounts" element={<Account />} />
       <Route path="basket" element={<Basket />} />
+      <Route path="accounts" element={<Account />} />
     </Route>
 </Routes>
 </BrowserRouter>

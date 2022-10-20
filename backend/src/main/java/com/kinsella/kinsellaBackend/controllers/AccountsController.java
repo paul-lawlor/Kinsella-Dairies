@@ -22,8 +22,8 @@ public class AccountsController {
 
     //get account by id
     @GetMapping("/accounts/{userID}")
-    public Collection<Accounts> getAccountByID(@PathVariable Long id) {
-        return accountsRepository.findByUserID(id);
+    public Collection<Accounts> getAccountByID(@PathVariable Long userID) {
+        return accountsRepository.findByUserID(userID);
     }
 
     //create a new instance of an account
