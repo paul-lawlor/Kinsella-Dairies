@@ -33,9 +33,6 @@ public class Accounts{
     
     @Column(name = "postcode")
     private String postcode;
-    
-    @Column(name = "startDate")
-    private Date startDate;
 
     @Column(name = "email")
     private String email;

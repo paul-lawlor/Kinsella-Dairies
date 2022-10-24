@@ -1,108 +1,69 @@
 import "./App.css";
+import { useState } from 'react';
 
 const Signup = () => {
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+  });
+
+
+  const submitForm = () => {
+    //get data - each element defined manually(DOM)
+    //post request - post body (JSON)
+    //log form state
+    //cleanup
+  }
+
   return (
     <>
-      <div className="signup-area">
-        <div className="form-area">
-          <form className="p-2">
-            <h3>Sign Up</h3>
+      <label>
+        First name:
+        <input
+          value={form.firstName}
+          onChange={e => {
+            setForm({
+              ...form,
+              firstName: e.target.value
+            });
+          }}
+        />
+      </label>
 
-            {/* Name */}
+      <label>
+        Last name:
+        <input
+          value={form.lastName}
+          onChange={e => {
+            setForm({
+              ...form,
+              lastName: e.target.value
+            });
+          }}
+        />
+      </label>
 
-            <div className="mb-2 pt-2 d-flex">
-              <div className="mx-1">
-                <label>First name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="First name"
-                />
-              </div>
-              <div className="mx-1">
-                <label>Last name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Last name"
-                />
-              </div>
-            </div>
-
-            {/* Email */}
-
-            <div className="input-medium mb-4 mx-1">
-              <label>Email Address</label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Enter email"
-              />
-            </div>
-
-            {/* Address */}
-
-            <div className="mb-1 mx-1">
-              <label> Address Line 1 </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Address Line 1"
-              />
-            </div>
-
-            <div className="mb-1 mx-1">
-              <label> Address Line 2 </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Address Line 2"
-              />
-            </div>
-
-            {/* Postcode */}
-            <div className="input-small mb-4 mx-1">
-              <label> Postcode </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Postcode"
-              />
-            </div>
-
-            {/* Password */}
-
-            <div className="mb-1 mx-1 input-medium">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Enter password"
-              />
-            </div>
-            <div className="mb-4 mx-1 input-medium">
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Confirm password"
-              />
-            </div>
-
-            <div className="d-grid">
-              <button type="submit" className="btn btn-primary">
+      <label>
+        Email:
+        <input
+          value={form.email}
+          onChange={e => {
+            setForm({
+              ...form,
+              email: e.target.value
+            });
+          }}
+        />
+      </label>
+      <p>
+        {form.firstName}{' '}
+        {form.lastName}{' '}
+        ({form.email})
+      </p>
+      <button type="submit" className="btn btn-primary" onClick={submitForm}>
                 Sign Up
               </button>
-            </div>
-            <p className="forgot-password text-right">
-              Already registered <a href="/Login">sign in?</a>
-            </p>
-          </form>
-        </div>
-        <div className="info-area p-2">
-          <p>Info here</p>
-        </div>
-      </div>
     </>
   );
 };
