@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AccountsController {
 
@@ -27,7 +27,7 @@ public class AccountsController {
     }
 
     //create a new instance of an account
-    @PostMapping("/accounts")
+    @PostMapping(path = "/accounts", consumes = {"application/json"})
     public Accounts createAccount(@Validated @RequestBody Accounts accounts) {
         accountsRepository.save(accounts);
         return accountsRepository.save(accounts);

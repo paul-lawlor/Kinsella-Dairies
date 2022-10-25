@@ -3,7 +3,6 @@ import ShopService from "../Services/ShopService";
 
 class ProductList extends React.Component {
   constructor(props) {
-    // eslint-disable-next-line no-this-before-super
     super(props);
     this.state = {
       products: [],

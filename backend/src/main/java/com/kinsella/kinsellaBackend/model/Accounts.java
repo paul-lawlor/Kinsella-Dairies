@@ -27,7 +27,7 @@ public class Accounts{
     
     @Column(name = "addressLine1")
     private String addressLineOne;
-    
+
     @Column(name = "addressLine2")
     private String addressLineTwo;
     
