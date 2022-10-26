@@ -1,5 +1,7 @@
+import AccountMangement from "../Components/AccountMangement";
+
 const Account = () => {
-  return <h1>Account</h1>;
+  return (<AccountMangement/>);
 };
 
 export default Account;

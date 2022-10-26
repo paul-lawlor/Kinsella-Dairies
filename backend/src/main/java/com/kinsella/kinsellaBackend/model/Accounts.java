@@ -34,8 +34,8 @@ public class Accounts{
     @Column(name = "postcode")
     private String postcode;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
 
     @Column(name = "password")
     private String password;

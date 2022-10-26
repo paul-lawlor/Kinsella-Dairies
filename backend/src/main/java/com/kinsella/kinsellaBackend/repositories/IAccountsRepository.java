@@ -7,5 +7,6 @@ import java.util.Collection;
 
 
 public interface IAccountsRepository extends JpaRepository<Accounts, Integer>{
-    Collection<Accounts> findByUserID(Long userID);
+    Collection<Accounts> findByUserID(Long user);
+    Accounts findByPhoneNumberAndPassword(String phoneNumber, String password);
 }

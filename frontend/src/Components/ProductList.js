@@ -1,5 +1,6 @@
 import React from "react";
 import ShopService from "../Services/ShopService";
+import LoginForm from "./LoginForm";
 
 class ProductList extends React.Component {
   constructor(props) {

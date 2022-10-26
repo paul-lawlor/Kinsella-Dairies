@@ -28,6 +28,7 @@ const SignupForm = () => {
         })
         .then(function (response) {
             console.log(response);
+            alert('You have signed up successfully. Please now login.')
             window.location.href = "http://localhost:3000/login"
         })
         .catch(function (error) {
@@ -119,7 +120,7 @@ const SignupForm = () => {
         <label>
             Phone Number:
             <input
-            value={form.email}
+            value={form.phoneNumber}
             onChange={e => {
                 setForm({
                 ...form,
@@ -132,6 +133,7 @@ const SignupForm = () => {
         <label>
             Password:
             <input
+            type = "password"
             value={form.password}
             onChange={e => {
                 setForm({
