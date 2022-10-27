@@ -57,9 +57,13 @@
 
 .info-area {
   background-color:rgba(188, 222, 226, 1);
-  width:50%;
 }
 
 .table{
   margin-left: 5rem;
+}
+
+.basket-button{
+  width: 15rem;
+  align-items:center;
 }

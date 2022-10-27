@@ -21,8 +21,7 @@ export default function Home() {
           <Carousel.Caption className="caption text-dark rounded-4">
             <h3>Welcome to Kinsella Dairies</h3>
             <p>
-              We are a family run business based somewhere in the UK I cant
-              remember.
+              We are a family run business based in Scotland.
             </p>
           </Carousel.Caption>
         </Carousel.Item>

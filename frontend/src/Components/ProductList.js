@@ -34,7 +34,7 @@ class ProductList extends React.Component {
                 <td> {products.productID}</td>
                 <td> {products.productName}</td>
                 <td> £{products.price}</td>
-                <button>Add to Cart</button>
+                <button className="">Add to Cart</button>
               </tr>
             ))}
           </tbody>

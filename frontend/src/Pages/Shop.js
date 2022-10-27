@@ -4,10 +4,10 @@ import Basket from "../Components/Basket";
 export default function Shop() {
   return (
     <>
-      <h1> shop </h1>
+      <h1 className='mx-3 mt-3'> Shop </h1>
       <div className="basket">
-        <ProductList></ProductList>
-        <Basket></Basket>
+        <ProductList/>
+        <Basket/>
       </div>
     </>
   );
