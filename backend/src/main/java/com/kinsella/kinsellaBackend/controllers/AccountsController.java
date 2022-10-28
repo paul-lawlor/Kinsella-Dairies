@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
+import java.util.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,34 +32,40 @@ public class AccountsController {
     }
 
     //get account by id
-//    @PutMapping("/accounts/{userID}")
-//    public Accounts updateAccount(@PathVariable Long userID, @Validated @RequestBody Accounts accountRequest) {
-//        Accounts updateAccount = (Accounts) accountsRepository.findByUserID(userID);
-//        return accountsRepository.findByUserID(userID)
-//                .map(account -> {
-//                    if (accountRequest.getFirstName() != null) {
-//                        updateAccount.setFirstName(accountRequest.getFirstName());
-//                    }
-//                    if (accountRequest.getLastName() != null) {
-//                        updateAccount.setLastName(accountRequest.getLastName());
-//                    }
-//                    if (accountRequest.getPhoneNumber() != null) {
-//                        updateAccount.setPhoneNumber(accountRequest.getPhoneNumber());
-//                    }
-//                    if (accountRequest.getAddressLineOne() != null) {
-//                        updateAccount.setAddressLineOne(accountRequest.getAddressLineOne());
-//                    }
-//                    if (accountRequest.getAddressLineOne() != null) {
-//                        updateAccount.setAddressLineTwo(accountRequest.getAddressLineOne());
-//                    }
-//                    if (accountRequest.getPostcode() != null) {
-//                        updateAccount.setPostcode(accountRequest.getPostcode());
-//                    }
-//                    if (accountRequest.getPassword() != null) {
-//                        updateAccount.setPassword(accountRequest.getPassword());
-//                    }
-//                }).orElseThrow(() -> new EntityNotFoundException("No account found with ID " + userID));
-//    }
+    @PutMapping("/accounts/{userID}")
+    public Accounts updateAccount(@PathVariable Long userID, @Validated @RequestBody Accounts accountRequest) {
+        return accountsRepository.findById(userID).map(account -> {
+            if (accountRequest.getFirstName() != null) {
+                account.setFirstName(accountRequest.getFirstName());
+            }
+            if (accountRequest.getLastName() != null) {
+                account.setLastName(accountRequest.getLastName());
+            }
+            if (accountRequest.getPhoneNumber() != null) {
+                account.setPhoneNumber(accountRequest.getPhoneNumber());
+            }
+            if (accountRequest.getAddressLineOne() != null) {
+                account.setAddressLineOne(accountRequest.getAddressLineOne());
+            }
+            if (accountRequest.getAddressLineOne() != null) {
+                account.setAddressLineTwo(accountRequest.getAddressLineOne());
+            }
+            if (accountRequest.getPostcode() != null) {
+                account.setPostcode(accountRequest.getPostcode());
+            }
+            if (accountRequest.getPassword() != null) {
+                account.setPassword(accountRequest.getPassword());
+            }
+            return accountsRepository.save(account);
+        }).orElseThrow(() -> new EntityNotFoundException("No account found with ID " + userID));
+    }
+
+    // Delete Mapping
+    @DeleteMapping("accounts/{userID}")
+    public String deleteAccount(@PathVariable Long userID) {
+        accountsRepository.deleteById(userID);
+        return "Account Deleted";
+    }
 
     //create a new instance of an account
     @PostMapping(path = "/accounts", consumes = {"application/json"})

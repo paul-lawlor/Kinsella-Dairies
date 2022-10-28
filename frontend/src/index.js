@@ -13,8 +13,15 @@ import Shop from "./Pages/Shop";
 import ProductList from "./Components/ProductList";
 
 export default function App() {
+
+  window.onload = (event) => {
+    if (window.location.href === "http://localhost:3000/") {
+      window.location.href = "http://localhost:3000/home"
+    }
+  }
+
   return (
-    
+
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>

@@ -15,25 +15,26 @@ const AccountMangement = () => {
         password: ''
     });
 
-    
-    const ACCOUNT_REST_API_URL = "http://localhost:5000/accounts/"+localStorage.getItem('userId');
-    
-    axios.get(ACCOUNT_REST_API_URL)
-    .then(function (response) {
-        const password= JSON.stringify(response.data);
-        // const parsed = JSON.parse(account)
-        //console.log(response.data[0].userID);
-        setUserData({
-            firstName: response.data[0].firstName,
-            lastName: response.data[0].lastName,
-            phoneNumber: response.data[0].phoneNumber,
-            addressLineOne: response.data[0].addressLineOne,
-            addressLineTwo: response.data[0].addressLineTwo,
-            postcode: response.data[0].postcode,
-            password: response.data[0].password
+    window.onload = (event) => {
+        const ACCOUNT_REST_API_URL = "http://localhost:5000/accounts/"+localStorage.getItem('userId');
+        
+        axios.get(ACCOUNT_REST_API_URL)
+        .then(function (response) {
+            const password= JSON.stringify(response.data);
+            // const parsed = JSON.parse(account)
+            //console.log(response.data[0].userID);
+            setUserData({
+                firstName: response.data[0].firstName,
+                lastName: response.data[0].lastName,
+                phoneNumber: response.data[0].phoneNumber,
+                addressLineOne: response.data[0].addressLineOne,
+                addressLineTwo: response.data[0].addressLineTwo,
+                postcode: response.data[0].postcode,
+                password: response.data[0].password
+            });
         });
-    })
-    
+    }
+
     const [form, setForm] = useState({
         firstName: '',
         lastName: '',
@@ -56,15 +57,16 @@ const AccountMangement = () => {
         })
         .then(function (response) {
             console.log(response);
-            //alert('You have changed details succesfully.')
+            alert('You have changed details succesfully.')
             //window.location.href = "http://localhost:3000/login"
         })
         .catch(function (error) {
-            //alert('Details could not be changed. Please try again.')
+            alert('Details could not be changed. Please try again.')
             console.log(error);
         });
     }
 
+    // Logout button
     const logOut = () => {
         localStorage.removeItem('userId');
         alert("You have successfully been logged out, redirecting to home page.");
@@ -81,10 +83,10 @@ const AccountMangement = () => {
 <div className="name-entry p-3 d-flex flex-column">
     <div className="d-flex my-1">
     <div className="firstName d-flex flex-column m-1 w-100">
-    <label>First name - Current: {userData.firstName}</label>
+    <label>First name</label>
     <input
         className="w-100"
-        value={form.firstName}
+        defaultValue={userData.firstName}
         onChange={e => {
             setForm({
             ...form,
@@ -95,10 +97,10 @@ const AccountMangement = () => {
     />
     </div>
     <div className="lastName d-flex flex-column m-1 w-100">
-    <label>Last name - Current: {userData.lastname}</label>
+    <label>Last name</label>
     <input
         className="w-100"
-        value={form.lastName}
+        defaultValue={userData.lastName}
         onChange={e => {
             setForm({
             ...form,
@@ -110,9 +112,9 @@ const AccountMangement = () => {
     </div>
     </div>
     <div className="phoneNumber d-flex flex-column m-1 w-100">
-    <label>Phone Number - Current: {userData.phoneNumber}</label>
+    <label>Phone Number</label>
         <input
-        value={form.phoneNumber}
+        defaultValue={userData.phoneNumber}
         onChange={e => {
             setForm({
             ...form,
@@ -126,10 +128,10 @@ const AccountMangement = () => {
 
 <div className="address-entry p-3">
 <div className="addresses d-flex flex-column m-1">
-<label>Address Line 1 - Current: {userData.addressLineOne}</label>
+<label>Address Line 1</label>
     <input
     className="w-100"
-    value={form.addressLineOne}
+    defaultValue={userData.addressLineOne}
     onChange={e => {
         setForm({
         ...form,
@@ -139,10 +141,10 @@ const AccountMangement = () => {
     }}
     />
 
-<label>Address Line 2 - Current: {userData.addressLineTwo}</label>
+<label>Address Line 2</label>
 <input
     className="w-100"
-    value={form.addressLineTwo}
+    defaultValue={userData.addressLineTwo}
     onChange={e => {
         setForm({
             ...form,
@@ -154,10 +156,10 @@ const AccountMangement = () => {
 </div>
 
 <div className="d-flex flex-column m-1">
-<label>Postcode - Current: {userData.postcode}</label>
+<label>Postcode</label>
 <input
     className="w-50"
-    value={form.postcode}
+    defaultValue={userData.postcode}
     onChange={e => {
         setForm({
         ...form,
@@ -170,10 +172,10 @@ const AccountMangement = () => {
 </div>
 
 <div className="password d-flex flex-column p-3 m-1">
-<label>Password - Current: {userData.password}</label>
+<label>Password</label>
 <input
+defaultValue={userData.password}
 type = "password"
-value={form.password}
 onChange={e => {
     setForm({
     ...form,
