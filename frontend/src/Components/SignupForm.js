@@ -18,11 +18,6 @@ const SignupForm = () => {
         postcode: '',
         password: ''
     });
-    
-    axios.get(ACCOUNT_REST_API_URL).then(resp => {
-
-        console.log(resp.data);
-    });
 
     const submitForm = async(e) => {
 
@@ -34,9 +29,9 @@ const SignupForm = () => {
             headers: {'Content-Type': 'application/json'}
         })
         .then(function (response) {
-            console.log(response);
-            alert('You have signed up successfully. Please now login.')
-            window.location.href = "http://localhost:3000/login"
+            alert('You have signed up successfully.')
+            localStorage.setItem('userId',response.data.userID);
+            window.location.href = "http://localhost:3000/accounts"
         })
         .catch(function (error) {
             console.log(error);
