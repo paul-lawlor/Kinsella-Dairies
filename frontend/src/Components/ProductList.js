@@ -1,47 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ShopService from "../Services/ShopService";
-import LoginForm from "./LoginForm";
+import { useState } from 'react';
 
-class ProductList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [],
-    };
-  }
+const ProductList = () => {
+  const [basket, setBasket] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {   
     ShopService.getProducts().then((response) => {
-      this.setState({ products: response.data });
-    });
-  }
+      setBasket({ products: response.data });
+  });
+  }, [])
 
-  render() {
+  const addToBasket = (products) => {
+    console.log('add to basket')
+    setBasket([...basket, products])
+  }
+    
     return (
-      <div className="row">
-        <h1 className="text-center"> Products </h1>
-        <table className="table ">
-          <thead>
-            <tr>
-              <td>Product Id</td>
-              <td>Product Name</td>
-              <td>Product Price</td>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.products?.map((products) => (
-              <tr key={products.productID}>
-                <td> {products.productID}</td>
-                <td> {products.productName}</td>
-                <td> £{products.price}</td>
-                <button className="">Add to Cart</button>
-              </tr>
+     
+             
+      <div className = "products">
+            {basket.products?.map((products) => (
+              <div key={products.productID}>
+                <h5> {products.productName}</h5>
+                <h6> £{products.price}</h6>
+                <img src ={products.image}></img>
+                <button onClick={() => addToBasket(products)}>Add to Cart</button>
+              </div>
             ))}
-          </tbody>
-        </table>
       </div>
     );
-  }
+  
 }
 
 export default ProductList;

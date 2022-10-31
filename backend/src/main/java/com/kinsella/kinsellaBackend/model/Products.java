@@ -25,6 +25,9 @@ public class Products {
     @Column (name = "price")
     private Double price;
 
+    @Column (name = "image")
+    private String image;
+
 
 //    public Products(String s, double v) {
 //    }
