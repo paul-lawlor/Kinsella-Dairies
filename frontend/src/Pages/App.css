@@ -68,3 +68,13 @@
   width: 15rem;
   align-items:center;
 }
+
+.singleproduct{
+ flex-wrap: wrap;
+ padding: 5px
+}
+
+.pimage{
+  width: 100px;
+  height: 100px;
+}
