@@ -222,7 +222,6 @@ const AccountMangement = () => {
                 />
                 </div>
 
-                </form>
                 <div className="d-flex justify-content-between">
                     <div className="p-3 py-1">
                     <button type="submit" className="btn btn-primary m-1" >Update Account Info</button>
@@ -232,6 +231,7 @@ const AccountMangement = () => {
                     <button className="btn btn-secondary m-1" onClick={logOut} >Logout</button>
                     </div>
                 </div>
+                </form>
         </>
   )}
   else{

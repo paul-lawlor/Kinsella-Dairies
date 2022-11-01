@@ -8,8 +8,6 @@ import heroImage2 from "../Images/cow2.jpg";
 import { useState } from 'react';
 
 export default function Home() {
-
-  
   
   // If account logged in, display account information
   // Otherwise, display sign up and login options

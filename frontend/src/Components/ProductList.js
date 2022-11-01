@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 const ProductList = () => {
   const [product, setProduct] = useState([]);
-  const [basket, setBasket] = useState([]);
 
   useEffect(() => {   
     ShopService.getProducts().then((response) => {
@@ -13,13 +12,27 @@ const ProductList = () => {
   }, [])
 
   const addToBasket = (products) => {
-    console.log('add to basket')
-    setBasket([...basket, { ...products }])
+
+    //creating local storage item if it doesn't already exist
+    if (localStorage.getItem('basket') === null) {
+      const array = []
+      localStorage.setItem('basket', JSON.stringify(array));
+    }
+
+
+    // Add id to basket
+    let currentBasket = JSON.parse(localStorage.getItem('basket'));
+    currentBasket.push(products);
+    localStorage.setItem('basket',JSON.stringify(currentBasket));
+    console.log(localStorage.getItem('basket')); // Logs current basket
+
+
+    //window.location.reload()
+  
   }
     
     return (
      
-    
       <div className = "products">
             {product.products?.map((products) => (
               <div className="singleproduct"key={products.productID}>

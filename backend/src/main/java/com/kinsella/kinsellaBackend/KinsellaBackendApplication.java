@@ -23,14 +23,14 @@ public class KinsellaBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-	this.productsRepository.save(new Products(1L, "1 pint skimmed milk", 1.30, "/1.jpeg"));
-	this.productsRepository.save(new Products(2L, "1 pint whole milk (glass)", 1.30, "/2.jpeg"));
-	this.productsRepository.save(new Products(3L, "1 pint skimmed milk organic (glass)", 1.80, "/3.jpeg"));
-	this.productsRepository.save(new Products(4L, "1 pint whole milk organic (glass)", 1.80, "/4.jpeg"));
+	this.productsRepository.save(new Products(1L, "Skimmed Milk (1 pint)", 1.30, "/1.jpeg"));
+	this.productsRepository.save(new Products(2L, "Whole Milk (1 pint) - glass", 1.30, "/2.jpeg"));
+	this.productsRepository.save(new Products(3L, "Organic Skimmed Milk (1 pint) - glass", 1.80, "/3.jpeg"));
+	this.productsRepository.save(new Products(4L, "Organic Whole Milk (1 pint) - glass", 1.80, "/4.jpeg"));
 	this.productsRepository.save(new Products(5L, "Eggs x 6", 1.80, "/5.jpg"));
-	this.productsRepository.save(new Products(6L, "1 pint Orange Juice", 2.00, "/6.jpg"));
-	this.productsRepository.save(new Products(7L, "1 litre Orange Juice", 3.00, "/7.jpg" ));
-	this.productsRepository.save(new Products(8L, "1 litre Apple Juice", 3.00, "/8.jpg"));
+	this.productsRepository.save(new Products(6L, "Orange Juice (1 pint)", 2.00, "/6.jpg"));
+	this.productsRepository.save(new Products(7L, "Orange Juice (1 litre)", 3.00, "/7.jpg" ));
+	this.productsRepository.save(new Products(8L, "Apple Juice (1 litre)", 3.00, "/8.jpg"));
 	}
 }
 

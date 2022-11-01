@@ -18,5 +18,14 @@ public class ProductsController {
 
     //get accounts
     @GetMapping("/products")
-    public List<Products> getProducts() { return productsRepository.findAll();}
+    public List<Products> getProducts() {
+        return productsRepository.findAll();
+    }
+
+    @GetMapping("/products/{productID}")
+    public Collection<Products> getProductByID(@PathVariable Long productID) {
+        return productsRepository.findByProductID(productID);
+    }
+
+
 }
