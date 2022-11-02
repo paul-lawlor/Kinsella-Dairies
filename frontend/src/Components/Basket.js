@@ -22,9 +22,9 @@ export default function Basket() {
       total += currentItem.price
 
     }
-    
+
   }
-  
+  //delivery fee
   const delivery = 1
   total += delivery
 

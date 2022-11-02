@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const BasketItem = (props) => {
 
+    console.log(props.product)
+
     const removeItem = () => {
         let basket = JSON.parse(localStorage.getItem('basket'))
         basket.splice(props.index);
@@ -16,6 +18,7 @@ const BasketItem = (props) => {
         <div className="display-flex align-items-center p-1 m-1 bg-light rounded-2">
             <img className="rounded-2 m-1" src={props.product?.image} width="50" height="50"/>
             <p><b>{props.product?.productName}</b>    £{props.product?.price}</p>
+            <p> Quantity X {props.product?.quantity} </p>
             <button onClick={removeItem}> Remove Item from Basket </button>
         </div>
     )

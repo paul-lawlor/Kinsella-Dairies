@@ -11,6 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Shop from "./Pages/Shop";
 import ProductList from "./Components/ProductList";
+import Order from './Pages/Order';
 
 export default function App() {
 
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="shop" element={<Shop />} />
           <Route path="signup" element={<Signup />} />
           <Route path="accounts" element={<Account />} />
+          <Route path="orders" element={<Order />} />
         </Route>
       </Routes>
     </BrowserRouter>

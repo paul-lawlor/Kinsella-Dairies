@@ -13,21 +13,52 @@ const ProductList = () => {
 
   const addToBasket = (products) => {
 
+    // Add quantity property to products obj
+    products.quantity = 1
+
     //creating local storage item if it doesn't already exist
     if (localStorage.getItem('basket') === null) {
       const array = []
       localStorage.setItem('basket', JSON.stringify(array));
     }
 
-
-    // Add id to basket
+    // get current basket
     let currentBasket = JSON.parse(localStorage.getItem('basket'));
-    currentBasket.push(products);
-    localStorage.setItem('basket',JSON.stringify(currentBasket));
-    console.log(localStorage.getItem('basket')); // Logs current basket
 
+    // If there are items in the basket
+    if (currentBasket.length > 0) {
+      let found = false;
 
-    //window.location.reload()
+      // Loop for all items in basket
+      for (let i = 0; i < currentBasket.length; i++){
+        // If current item and item we want to add share the same name
+        // Add 1 to quantity
+        if (currentBasket[i].productName === products.productName) {
+          if (currentBasket[i].quantity < 10) {
+            currentBasket[i].quantity += 1
+            currentBasket.push(products);
+            localStorage.setItem('basket',JSON.stringify(currentBasket));
+          } else {
+            console.log("cant add item")
+            return "Max item limit reached"
+          }
+          found = true
+        }
+      }
+
+      // If item we are adding wasnt in basket, add it as new item
+      if (found === false) {
+        currentBasket.push(products);
+        localStorage.setItem('basket',JSON.stringify(currentBasket));
+      }
+
+    // If the basket is empty, add item
+    } else {
+      currentBasket.push(products);
+      localStorage.setItem('basket',JSON.stringify(currentBasket));
+    }  
+
+    window.location.reload()
   
   }
     
