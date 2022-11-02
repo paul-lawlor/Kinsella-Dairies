@@ -36,7 +36,6 @@ const ProductList = () => {
         if (currentBasket[i].productName === products.productName) {
           if (currentBasket[i].quantity < 10) {
             currentBasket[i].quantity += 1
-            currentBasket.push(products);
             localStorage.setItem('basket',JSON.stringify(currentBasket));
           } else {
             console.log("cant add item")
@@ -66,11 +65,11 @@ const ProductList = () => {
      
       <div className = "products">
             {product.products?.map((products) => (
-              <div className="singleproduct"key={products.productID}>
+              <div className="singleproduct shadow-sm d-flex flex-column justify-content-between bg-light p-2 m-1 rounded-3"key={products.productID}>
                 <h5> {products.productName}</h5>
-                <img className="pimage" src ={products.image}></img>
+                <img className="pimage rounded-2" src ={products.image}></img>
                 <h6> £{products.price}</h6>
-                <button onClick={() => addToBasket(products)}>Add to Cart</button>
+                <button className="btn btn-secondary" onClick={() => addToBasket(products)}>Add to Cart</button>
               </div>
             ))}
       </div>

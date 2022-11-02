@@ -25,13 +25,19 @@ public class Orders {
         @Column(name = "totalPrice")
         private Integer totalPrice;
 
-        @ManyToOne
-        @JoinColumn(name = "userID", referencedColumnName = "userID")
-        private Accounts userID;
+        @Column(name = "userID")
+        private String userID;
 
-        @OneToMany
-        @JoinColumn(name = "orderID")
-        private List<OrderProduct> productOrderID;
+//        @ManyToOne
+//        @JoinColumn(name = "userID", referencedColumnName = "userID")
+//        private Accounts userID;
+
+        @Column(name = "items")
+        private String items;
+
+//        @OneToMany
+//        @JoinColumn(name = "productOrderID")
+//        private List<OrderProduct> productOrderID;
 
     
 }

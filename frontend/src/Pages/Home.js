@@ -79,7 +79,11 @@ export default function Home() {
         </Carousel>
 
         <div className="button-area text-center">
-          <h2>More coming soon...</h2>
+          <h2>See what we have to offer. Visit the shop!</h2>
+          <Button href="/shop" className="home-button">
+            Shop
+          </Button>
+          
         </div>
       </>
       );
