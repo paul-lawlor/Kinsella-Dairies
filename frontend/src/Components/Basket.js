@@ -50,21 +50,21 @@ export default function Basket() {
     });
 
     localStorage.removeItem('basket');
+
   }
   
   //delivery fee
   const delivery = 1
   total += delivery
-
-  total = total.toFixed(2)
+  console.log(typeof(total))
 
   if (localStorage.getItem("basket") !== null && localStorage.getItem("basket") !== '[]') {
     return (
       <aside className="block cart m-5 col-1 d-flex flex-column justify-content-between align-middle shadow-sm">
         <h2>Basket</h2>
         {basketItems}
-        <p className="mt-1 pt-2">Delivery Fee: £{delivery}</p>
-        <b className="mb-1 pb-2">Total: £{total}</b>
+        <p className="mt-1 pt-2">Delivery Fee: £{delivery.toFixed(2)}</p>
+        <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
         <button className="basket-button btn btn-secondary" onClick={() => placeOrder()}>Place Order</button>
       </aside>
     );
