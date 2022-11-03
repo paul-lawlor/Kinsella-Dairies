@@ -41,6 +41,7 @@ const BasketItem = (props) => {
     }
 
     let price = props.product?.price * props.product?.quantity
+    price = price.toFixed(2)
 
     return (
         <div className="display-flex align-items-center p-1 m-1 bg-light rounded-2">

@@ -56,6 +56,8 @@ export default function Basket() {
   const delivery = 1
   total += delivery
 
+  total = total.toFixed(2)
+
   if (localStorage.getItem("basket") !== null && localStorage.getItem("basket") !== '[]') {
     return (
       <aside className="block cart m-5 col-1 d-flex flex-column justify-content-between align-middle shadow-sm">

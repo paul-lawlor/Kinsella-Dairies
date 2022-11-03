@@ -68,7 +68,7 @@ const ProductList = () => {
               <div className="singleproduct shadow-sm d-flex flex-column justify-content-between bg-light p-2 m-1 rounded-3"key={products.productID}>
                 <h5> {products.productName}</h5>
                 <img className="pimage rounded-2" src ={products.image}></img>
-                <h6> £{products.price}</h6>
+                <h6> £{(products.price).toFixed(2)}</h6>
                 <button className="btn btn-secondary" onClick={() => addToBasket(products)}>Add to Cart</button>
               </div>
             ))}
