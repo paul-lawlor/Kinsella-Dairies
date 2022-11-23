@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query'
+import axios from 'axios';
 import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
@@ -13,28 +15,31 @@ import Shop from "./Pages/Shop";
 import ProductList from "./Components/ProductList";
 import Order from './Pages/Order';
 
+const defaultQueryFn = async ({ queryKey }) => {
+  const { data } = await axios.get(queryKey);
+  return data;
+};
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { queryFn: defaultQueryFn } }
+});
+
 export default function App() {
-
-  window.onload = (event) => {
-    if (window.location.href === "http://localhost:3000/") {
-      window.location.href = "http://localhost:3000/home"
-    }
-  }
-
   return (
-
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="home" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="accounts" element={<Account />} />
-          <Route path="orders" element={<Order />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="accounts" element={<Account />} />
+            <Route path="orders" element={<Order />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
