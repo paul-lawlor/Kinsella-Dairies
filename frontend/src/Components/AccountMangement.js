@@ -51,7 +51,7 @@ const AccountMangement = () => {
       );
     }
 
-    if (!data?.[0]) {
+    if (!data?.[0] || localStorage.length === 0) {
       //user is not logged in
       localStorage.removeItem("userId");
 

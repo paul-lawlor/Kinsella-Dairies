@@ -27,7 +27,7 @@ const LoginForm = () => {
           console.log(response);
           localStorage.setItem("userId", response.data.slice(2));
           console.log(localStorage.getItem("userId"));
-          navigate("http://localhost:3000/accounts/");
+          navigate("/accounts");
         }
       })
       .catch(function (error) {

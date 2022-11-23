@@ -10,9 +10,13 @@ const DELIVERY_FEE = 1;
 export default function Basket() {
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
-  const [basket, setBasket] = useState(
-    JSON.parse(localStorage.getItem("basket"))
-  );
+  const [basket, setBasket] = useState([])
+
+  useEffect(() => {
+    if (localStorage.getItem('basket') !== null) {
+        setBasket(JSON.parse(localStorage.getItem("basket")))
+    }
+  }, [])
 
   // let basketItems = [];
 
@@ -30,6 +34,8 @@ export default function Basket() {
     //const json = localStorage.getItem('basket')
     let id = localStorage.getItem("userId");
     let items = localStorage.getItem("basket");
+
+    console.log(total)
 
     const apiUrl = "http://localhost:5000/orders/" + id;
 
@@ -54,7 +60,7 @@ export default function Basket() {
         alert("Your order has been placed.");
         localStorage.setItem("userOrder", "true");
         localStorage.removeItem("basket");
-        navigate("http://localhost:3000/orders");
+        navigate("/orders");
       })
       .catch(function (error) {
         console.log(error);

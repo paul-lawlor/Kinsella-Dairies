@@ -13,9 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class Orders {
-    
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,7 +30,11 @@ public class Orders {
 //        @JoinColumn(name = "userID", referencedColumnName = "userID")
 //        private Accounts userID;
 
-        @Column(name = "items")
+        @Column(
+                name = "items",
+                columnDefinition = "TEXT",
+                length = 65534
+        )
         private String items;
 
 //        @OneToMany

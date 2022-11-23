@@ -32,7 +32,7 @@ const SignupForm = () => {
       .then(function (response) {
         alert("You have signed up successfully.");
         localStorage.setItem("userId", response.data.userID);
-        navigate("http://localhost:3000/accounts");
+        navigate("/accounts");
       })
       .catch(function (error) {
         console.log(error);
