@@ -32,6 +32,7 @@ export function NavigationBar() {
               <Nav.Link href="/shop">Shop</Nav.Link>
               <Nav.Link href="/accounts">Account</Nav.Link>
               <Nav.Link href="/orders">Orders</Nav.Link>
+              <Nav.Link href="/admin">Admin</Nav.Link>
             </Nav>
             <Nav>
               <NavDropdown
