@@ -4,7 +4,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AccountService from "../Services/AccountService";
-import confused from "../Images/confused.png";
+import ErrorMessage from "../Components/ErrorMessage";
 
 const AccountMangement = () => {
   // Defining API URL for later use when targeting the 'accounts' endpoint
@@ -31,23 +31,15 @@ const AccountMangement = () => {
       //error handling
       localStorage.removeItem("userId");
       return (
-        <>
-          <div className="p-3 d-flex">
-            <img
-              src={confused}
-              width="130"
-              height="130"
-              className="rounded-2"
-            />
-            <div className="d-flex flex-column mx-3 align-self-center">
-              <h2>An error has occurred</h2>
-              <p>
-                Please either <a href="/login">Login</a> or{" "}
-                <a href="/signup">Sign up</a>.
-              </p>
-            </div>
-          </div>
-        </>
+        <ErrorMessage
+          title="You're not logged in"
+          subtitle={
+            <p>
+              Please either <a href="/login">Login</a> or
+              <a href="/signup">Sign up</a>.
+            </p>
+          }
+        />
       );
     }
 
@@ -56,23 +48,15 @@ const AccountMangement = () => {
       localStorage.removeItem("userId");
 
       return (
-        <>
-          <div className="p-3 d-flex">
-            <img
-              src={confused}
-              width="130"
-              height="130"
-              className="rounded-2"
-            />
-            <div className="d-flex flex-column mx-3 align-self-center">
-              <h2>You are not logged in</h2>
-              <p>
-                Please either <a href="/login">Login</a> or{" "}
-                <a href="/signup">Sign up</a>.
-              </p>
-            </div>
-          </div>
-        </>
+        <ErrorMessage
+          title="You're not logged in"
+          subtitle={
+            <p>
+              Please either <a href="/login">Login</a> or
+              <a href="/signup">Sign up</a>.
+            </p>
+          }
+        />
       );
     }
 
@@ -262,16 +246,15 @@ const AccountMangement = () => {
     return getData();
   } else {
     return (
-      <div className="p-3 d-flex">
-        <img src={confused} width="130" height="130" className="rounded-2" />
-        <div className="d-flex flex-column mx-3 align-self-center">
-          <h2>You are not logged in</h2>
+      <ErrorMessage
+        title="You're not logged in"
+        subtitle={
           <p>
             Please either <a href="/login">Login</a> or{" "}
             <a href="/signup">Sign up</a>.
           </p>
-        </div>
-      </div>
+        }
+      />
     );
   }
 };

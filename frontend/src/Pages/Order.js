@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import OrderBasketItem from "../Components/OrderBasketItem";
 import axios from "axios";
-import confused from "../Images/confused.png";
 import "./App.css";
 
 const Order = () => {
@@ -33,16 +32,15 @@ const Order = () => {
 
     if (localStorage.getItem("userId") === null) {
       return (
-        <div className="p-3 d-flex">
-          <img src={confused} width="130" height="130" className="rounded-2" />
-          <div className="d-flex flex-column mx-3 align-self-center">
-            <h2>You are not logged in</h2>
-            <p>
-              Please either <a href="/login">Login</a> or{" "}
-              <a href="/signup">Sign up</a>.
-            </p>
-          </div>
-        </div>
+        <ErrorMessage
+        title="You're not logged in"
+        subtitle={
+          <p>
+            Please either <a href="/login">Login</a> or{" "}
+            <a href="/signup">Sign up</a>.
+          </p>
+        }
+      />
       );
     }
 
@@ -50,26 +48,10 @@ const Order = () => {
       //localStorage.removeItem("userId");
 
       return (
-        <>
-          <div className="p-3 d-flex">
-            <img
-              src={confused}
-              width="130"
-              height="130"
-              className="rounded-2"
-            />
-            <div className="d-flex flex-column mx-3 align-self-center">
-              <h2>
-                Whoops! There's a problem with our Shop page at the moment...
-              </h2>
-              <h3>Try again later.</h3>
-              <p>
-                Please either <a href="/login">Login</a> or{" "}
-                <a href="/signup">Sign up</a>.
-              </p>
-            </div>
-          </div>
-        </>
+        <ErrorMessage
+          title="There was a problem loading your order"
+          subtitle="Please try again later."
+        />
       );
     }
 
