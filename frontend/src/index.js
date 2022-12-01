@@ -9,6 +9,7 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Account from "./Pages/Account";
 import Admin from "./Pages/Admin";
+import AdminLogin from "./Pages/AdminLogin"
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -38,6 +39,7 @@ export default function App() {
             <Route path="accounts" element={<Account />} />
             <Route path="orders" element={<Order />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="adminlogin" element={<AdminLogin />} />
           </Route>
         </Routes>
       </BrowserRouter>

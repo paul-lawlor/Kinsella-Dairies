@@ -57,7 +57,11 @@
 .input-small {width:200px;}
 
 .info-area {
-  background-color:rgba(188, 222, 226, 1);
+  background-color:rgb(188, 222, 226);
+}
+
+.admin-info-area {
+  background-color:rgb(164, 207, 162);
 }
 
 .table{

@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import css from "../Pages/App.css";
 
-const LoginForm = () => {
+const AdminLoginForm = () => {
   const navigate = useNavigate();
   const ACCOUNT_REST_API_URL = "http://localhost:5000/login";
 
@@ -16,7 +16,6 @@ const LoginForm = () => {
     e.preventDefault();
 
     const json = JSON.stringify(form);
-    console.log(form);
 
     axios
       .post(ACCOUNT_REST_API_URL, json, {
@@ -24,13 +23,13 @@ const LoginForm = () => {
       })
       .then(function (response) {
         console.log(response.data);
-        if (response.data[0] === "t" && response.data[2] === "false") {
+        if (response.data[0] === "t" && response.data[2] === "true") {
           console.log(response);
           localStorage.setItem("userId", response.data[1]);
           console.log(localStorage.getItem("userId"));
-          navigate("/accounts");
+          navigate("/admin");
         } else {
-          alert("Invalid phone number or password entered, please try again.");
+          alert("Invalid credentials entered, please try again.");
         }
       })
       .catch(function (error) {
@@ -43,10 +42,10 @@ const LoginForm = () => {
     <>
       <div className="d-flex justify-content-around">
         <div className="form-area d-flex flex-column w-50">
-          <h2 className="mx-3 mt-3">Login</h2>
+          <h2 className="mx-3 mt-3">Admin Login</h2>
           <form className="p-2" onSubmit={submitForm}>
             <div className="d-flex flex-column m-1">
-              <label>Phone Number</label>
+              <label>Admin Number</label>
               <input
                 value={form.phoneNumber}
                 onChange={(e) => {
@@ -81,28 +80,29 @@ const LoginForm = () => {
           </p>
         </div>
 
-        <div className="info-area w-50 p-2">
+        <div className="admin-info-area w-50 p-2">
           <h3>How to log in</h3>
+
           <p>
-            To log in, please enter the phone number and password associated
-            with your Kinsella Dairies online account.
-            <br />
-            <br />
-            Use your mouse to navigate over to the box under Phone Number ,
-            left-click on it, and then type in your phone number. Once you have
+            {" "}
+            To log in, please enter your assigned admin number and password.{" "}
+          </p>
+
+          <p>
+            Use your mouse to navigate over to the box under Admin Number ,
+            left-click on it, and then type in your admin number. Once you have
             done this, do the same for the Password box.
-            <br />
-            <br />
+          </p>
+          <p>
             After you have entered information into both boxes, move your mouse
             over to the
             <b> Login</b> button and click it. Ensure the information you have
             entered is correct
-            <br />
-            <br />
-            <p>
-              If you don't already have an account with Kinsella Dairies, please
-              proceed to the <b>Sign Up</b> page.
-            </p>
+          </p>
+
+          <p>
+            If you do not yet have admin credentials, please contact your line
+            manager and resolve this.
           </p>
         </div>
       </div>
@@ -110,4 +110,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default AdminLoginForm;

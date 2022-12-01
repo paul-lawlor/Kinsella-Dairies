@@ -7,6 +7,8 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 export function NavigationBar() {
+
+  if (localStorage.getItem('userID') !== null)
   return (
     <>
       <link
@@ -33,6 +35,7 @@ export function NavigationBar() {
               <Nav.Link href="/accounts">Account</Nav.Link>
               <Nav.Link href="/orders">Orders</Nav.Link>
               <Nav.Link href="/admin">Admin</Nav.Link>
+              <Nav.Link href="/adminlogin"> Admin Login</Nav.Link>
             </Nav>
             <Nav>
               <NavDropdown
@@ -67,4 +70,5 @@ export function NavigationBar() {
       </Navbar>
     </>
   );
+  
 }

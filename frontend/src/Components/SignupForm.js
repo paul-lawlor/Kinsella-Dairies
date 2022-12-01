@@ -18,12 +18,14 @@ const SignupForm = () => {
     addressLineTwo: "",
     postcode: "",
     password: "",
+    admin: "false",
   });
 
   const submitForm = async (e) => {
     e.preventDefault();
 
     const json = JSON.stringify(form);
+    console.log(json);
 
     axios
       .post(ACCOUNT_REST_API_URL, json, {
