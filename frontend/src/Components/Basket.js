@@ -46,6 +46,13 @@ export default function Basket() {
 
   const placeOrder = async () => {
     //const json = localStorage.getItem('basket')
+
+    // If not signed in, prompt user
+    if (localStorage.getItem("userId") === null) {
+      alert("Please sign-up or login to place an order.");
+      return;
+    }
+
     let id = localStorage.getItem("userId");
     let items = localStorage.getItem("basket");
 

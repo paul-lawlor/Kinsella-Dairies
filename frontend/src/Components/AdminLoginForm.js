@@ -27,6 +27,7 @@ const AdminLoginForm = () => {
           console.log(response);
           localStorage.setItem("userId", response.data[1]);
           console.log(localStorage.getItem("userId"));
+          localStorage.setItem("userType", "admin");
           navigate("/admin");
         } else {
           alert("Invalid credentials entered, please try again.");

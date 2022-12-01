@@ -237,9 +237,7 @@ const AccountMangement = () => {
 
   // Logout button
   const logOut = () => {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("basket");
-    localStorage.removeItem("userOrder");
+    localStorage.clear()
     alert("You have successfully been logged out, redirecting to home page.");
     navigate("/");
   };

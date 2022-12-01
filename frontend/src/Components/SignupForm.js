@@ -34,6 +34,7 @@ const SignupForm = () => {
       .then(function (response) {
         alert("You have signed up successfully.");
         localStorage.setItem("userId", response.data.userID);
+        localStorage.setItem("userType", "user");
         navigate("/accounts");
       })
       .catch(function (error) {

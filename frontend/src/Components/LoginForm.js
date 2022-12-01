@@ -27,6 +27,7 @@ const LoginForm = () => {
         if (response.data[0] === "t" && response.data[2] === "false") {
           console.log(response);
           localStorage.setItem("userId", response.data[1]);
+          localStorage.setItem("userType", "user");
           console.log(localStorage.getItem("userId"));
           navigate("/accounts");
         } else {
