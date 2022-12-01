@@ -6,8 +6,8 @@ const incrementQuantity = (basket, productName) => {
   const existingItemIndex = basket.findIndex(
     (item) => item.productName === productName
   );
-  if (basket[existingItemIndex].quantity >= 10) {
-    alert("Quantity has reached its maximum (10) for this item");
+  if (basket[existingItemIndex].quantity >= 10 || basket[existingItemIndex].stock < basket[existingItemIndex].quantity + 1) {
+    alert("You can't add any more to your order");
     basket[existingItemIndex].quantity--;
   }
   basket[existingItemIndex].quantity++;

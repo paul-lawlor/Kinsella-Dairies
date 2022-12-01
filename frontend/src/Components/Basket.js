@@ -10,32 +10,44 @@ const DELIVERY_FEE = 1;
 export default function Basket() {
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
-  const [basket, setBasket] = useState([])
+  const [basket, setBasket] = useState([]);
 
   useEffect(() => {
-    if (localStorage.getItem('basket') !== null) {
-        setBasket(JSON.parse(localStorage.getItem("basket")))
+    if (localStorage.getItem("basket") !== null) {
+      setBasket(JSON.parse(localStorage.getItem("basket")));
     }
-  }, [])
+  }, []);
 
-  // let basketItems = [];
+  const manageStock = async () => {
+    //remove 'quantity' of basket items from the 'stock' level (for each item in the basket)
+    for (let i = 0; i < basket.length; i++) {
+      let STOCK_REST_API_URL =
+        "http://localhost:5000/admin/stock/" + basket[i].productID;
+      let stockAfter = basket[i].stock - basket[i].quantity;
 
-  // if (localStorage.getItem("basket") !== null) {
-  //   let itemCount = JSON.parse(localStorage.getItem("basket")).length;
+      let json = JSON.stringify({
+        stock: stockAfter,
+      });
 
-  //   for (let i = 0; i < itemCount; i++) {
-  //     let currentItem = JSON.parse(localStorage.getItem("basket"))[i];
-  //     basketItems.push(<BasketItem product={currentItem} index={i} />);
-  //     total += currentItem.price * currentItem.quantity;
-  //   }
-  // }
+      await axios
+        .put(STOCK_REST_API_URL, json, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          alert("An error occurred with your order.");
+          console.log(error);
+        });
+    }
+    console.log(stockAfter);
+  };
 
   const placeOrder = async () => {
     //const json = localStorage.getItem('basket')
     let id = localStorage.getItem("userId");
     let items = localStorage.getItem("basket");
-
-    console.log(total)
 
     const apiUrl = "http://localhost:5000/orders/" + id;
 
@@ -58,6 +70,7 @@ export default function Basket() {
       .then(function (response) {
         console.log(response);
         alert("Your order has been placed.");
+        manageStock(basket);
         localStorage.setItem("userOrder", "true");
         localStorage.removeItem("basket");
         navigate("/orders");
