@@ -78,17 +78,19 @@ public class AccountsController {
 
     //account login handling
     @PostMapping(path = "/login", consumes = {"application/json"})
-    public String loginUser(@Validated @RequestBody Accounts account) {
+    public String[] loginUser(@Validated @RequestBody Accounts account) {
         System.out.println(account);
 
         Accounts existingAccount = accountsRepository.findByPhoneNumber(account.getPhoneNumber());
-        Long id = existingAccount.getUserID();
-
+        String id = (existingAccount.getUserID()).toString();
+        String admin = existingAccount.getAdmin();
 
         if (existingAccount.getPassword().equals(account.getPassword())) {
-            return "t,"+id;
+            String[] response = {"t", id, admin};
+            return response;
         }
-        return "f";
+        String[] response = {"f", id, admin};
+        return response;
         //return existingAccount.getPassword().equals(account.getPassword());
     }
 

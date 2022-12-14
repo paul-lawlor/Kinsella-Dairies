@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Collection;
 
 
-public interface ProductsRepository extends JpaRepository<Products, Integer>{
+public interface ProductsRepository extends JpaRepository<Products, Long>{
     Collection<Products> findByProductID(Long productID);
 }

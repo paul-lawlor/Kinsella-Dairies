@@ -28,6 +28,9 @@ public class Products {
     @Column (name = "image")
     private String image;
 
+    @Column (name = "stock")
+    private Integer stock;
+
 
 //    public Products(String s, double v) {
 //    }

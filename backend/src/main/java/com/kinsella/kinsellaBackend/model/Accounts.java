@@ -40,5 +40,8 @@ public class Accounts{
     @Column(name = "password")
     private String password;
 
+    @Column(name="admin")
+    private String admin;
+
 
 }
