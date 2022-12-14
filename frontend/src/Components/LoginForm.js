@@ -29,7 +29,7 @@ const LoginForm = () => {
           localStorage.setItem("userId", response.data[1]);
           localStorage.setItem("userType", "user");
           console.log(localStorage.getItem("userId"));
-          navigate("/accounts");
+          navigate("/shop");
         } else {
           alert("Invalid phone number or password entered, please try again.");
         }

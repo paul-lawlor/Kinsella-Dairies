@@ -91,3 +91,7 @@
 #delete{
   align-self: flex-end;
 }
+
+.singleProduct {
+  background-color: rgba(41, 159, 209, 0.101);
+}

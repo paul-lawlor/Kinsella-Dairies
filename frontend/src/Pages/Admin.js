@@ -10,8 +10,10 @@ import AdminDeleteProduct from "../Components/AdminDeleteProduct";
 import AdminUpdateProduct from "../Components/AdminUpdateProduct";
 import StockManagement from "../Components/StockManagement";
 import ErrorMessage from "../Components/ErrorMessage";
+import "./App.css";
 
 const Admin = () => {
+  // window.location.reload(false);
   // Defining API URL for later use when targeting the 'products' endpoint
   const PRODUCT_REST_API_URL = "http://localhost:5000/products";
 
@@ -31,25 +33,28 @@ const Admin = () => {
 
   return (
     <>
-      <AdminCreateProduct />
-      <div className="products">
+      <div className="products m-5 px-5">
         {data?.map((products) => (
           <div
-            className="singleproduct shadow-sm d-flex flex-column justify-content-between bg-light p-2 m-1 rounded-3"
+            className="singleProduct shadow-sm d-flex flex-column justify-content-between p-4 m-2 rounded-3"
             key={products.productID}
           >
-            <h5> {products.productName}</h5>
-            <img className="pimage rounded-2" src={products.image}></img>
+            <div className="d-flex justify-content-between align-items-center">
+              <h5> {products.productName}</h5>
+              <AdminDeleteProduct productID={products.productID} />
+            </div>
+            <img className="pimage rounded-2 mb-2" src={products.image}></img>
             <h6> £{products.price}</h6>
-            <h6>
-              {" "}
-              In Stock: {products.stock} <StockManagement product={products} />{" "}
-            </h6>
-
-            <AdminDeleteProduct productID={products.productID} />
+            <div className="d-flex justify-content-between align-items-center rounded-2 my-1">
+              <h6>In Stock: {products.stock}</h6>
+              <StockManagement product={products} />
+            </div>
             <AdminUpdateProduct product={products} />
           </div>
         ))}
+      </div>
+      <div className="d-flex mx-5 my-4 px-5 justify-content-center">
+        <AdminCreateProduct />
       </div>
     </>
   );

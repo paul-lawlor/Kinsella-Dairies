@@ -7,11 +7,10 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 const AdminDeleteProduct = (props) => {
-  const ADMIN_REST_API_URL = "http://localhost:5000/admin/"+props.productID;
+  const ADMIN_REST_API_URL = "http://localhost:5000/admin/" + props.productID;
 
   //function which submits the form
   const deleteProduct = async () => {
-
     // Ask user twice to confirm before account deletion
     let choice = confirm(
       "Do you really want to delete this product? It will be erased permenantely and cannot be retrieved."
@@ -36,7 +35,11 @@ const AdminDeleteProduct = (props) => {
 
   return (
     <>
-      <button className="btn btn-danger" id = "delete" onClick={deleteProduct}>
+      <button
+        className="btn btn-danger m-2"
+        id="delete"
+        onClick={deleteProduct}
+      >
         X
       </button>
     </>

@@ -225,7 +225,8 @@ const AccountMangement = () => {
           .then((res) => {
             alert("Account has been deleted successfully.");
             localStorage.clear();
-            navigate("/");
+            window.location.href = "http://localhost:3000/"; // Remove when fixed \/
+            //navigate("/"); Fix later
           })
           .catch((error) => {
             alert("Account couldnt be deleted. Please try again.");
@@ -237,9 +238,10 @@ const AccountMangement = () => {
 
   // Logout button
   const logOut = () => {
-    localStorage.clear()
+    localStorage.clear();
     alert("You have successfully been logged out, redirecting to home page.");
-    navigate("/");
+    window.location.href = "http://localhost:3000/"; // Remove when fixed \/
+    //navigate("/"); Fix later
   };
 
   if (localStorage.getItem("userId") !== null) {

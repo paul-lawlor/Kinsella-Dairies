@@ -9,6 +9,13 @@ import axios from "axios";
 const AdminCreateProduct = () => {
   const ADMIN_REST_API_URL = "http://localhost:5000/admin";
 
+  const poundFormatter = new Intl.NumberFormat("en-UK", {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
+  });
+
+  const formatCurrency = (val) => poundFormatter.format(val);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -19,8 +26,11 @@ const AdminCreateProduct = () => {
     productName: "",
     price: "",
     image: "",
-    stock: ""
+    stock: "",
   });
+
+  // useStaet for price
+  const [formPrice, setFormPrice] = useState(0);
 
   //function which submits the form
   const submitForm = async (e) => {
@@ -51,7 +61,7 @@ const AdminCreateProduct = () => {
       productName: "",
       price: "",
       image: "",
-      stock: ""
+      stock: "",
     });
 
     handleClose();
@@ -59,8 +69,11 @@ const AdminCreateProduct = () => {
 
   return (
     <>
-      <button className="btn btn-secondary" onClick={handleShow}>
-        Add Product
+      <button
+        className="btn btn-success fw-bold fs-4 px-5 py-2 mb-3 w-50 shadow"
+        onClick={handleShow}
+      >
+        Add a Product
       </button>
 
       <Modal
@@ -77,6 +90,7 @@ const AdminCreateProduct = () => {
             <div>
               <label> Product Name </label>
               <input
+                required
                 value={form.productName}
                 onChange={(e) => {
                   setForm({
@@ -89,7 +103,11 @@ const AdminCreateProduct = () => {
             <div>
               <label> Price </label>
               <input
+                required
                 value={form.price}
+                type="number"
+                min="0"
+                step="0.01"
                 onChange={(e) => {
                   setForm({
                     ...form,
@@ -113,6 +131,7 @@ const AdminCreateProduct = () => {
             <div>
               <label> Initial Stock Level </label>
               <input
+                required
                 value={form.stock}
                 onChange={(e) => {
                   setForm({

@@ -7,7 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 export function NavigationBar() {
-  const userID = localStorage.getItem("userID");
+  const userID = localStorage.getItem("userId");
   const userType = localStorage.getItem("userType");
 
   if (userID !== null && userType === "user") {
@@ -34,8 +34,7 @@ export function NavigationBar() {
               <Nav className="me-auto">
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/shop">Shop</Nav.Link>
-                <Nav.Link href="/admin">Admin</Nav.Link>
-                <Nav.Link href="/adminlogin"> Admin Login</Nav.Link>
+                <Nav.Link href="/accounts">Account</Nav.Link>
               </Nav>
               <Nav>
                 <NavDropdown
@@ -61,8 +60,8 @@ export function NavigationBar() {
                   }
                   id="basic-nav-dropdown"
                 >
-                  <Nav.Link href="/accounts">Account</Nav.Link>
-                  <Nav.Link href="/orders">Orders</Nav.Link>
+                  <NavDropdown.Item href="/accounts">Account</NavDropdown.Item>
+                  <NavDropdown.Item href="/orders">Order</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
@@ -179,7 +178,10 @@ export function NavigationBar() {
                 >
                   <NavDropdown.Item href="/Login">Log in</NavDropdown.Item>
                   <NavDropdown.Item href="/Signup">Signup</NavDropdown.Item>
-                  <NavDropdown.Item href="/adminlogin"> Admin Login</NavDropdown.Item>
+                  <NavDropdown.Item href="/adminlogin">
+                    {" "}
+                    Admin Login
+                  </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>

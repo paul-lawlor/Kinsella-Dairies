@@ -45,12 +45,12 @@ const StockManagement = (props) => {
   return (
     <>
       <button className="btn btn-secondary" onClick={handleShow}>
-        Update Stock
+        Set Stock
       </button>
 
       <Modal style={{ opacity: 1 }} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title id="ModalHeader">Update Stock</Modal.Title>
+          <Modal.Title id="ModalHeader">Set Stock</Modal.Title>
         </Modal.Header>
         <form onSubmit={submitForm}>
           <Modal.Body>

@@ -46,7 +46,7 @@ const AdminUpdateProduct = (props) => {
         window.location.reload();
       })
       .catch(function (error) {
-        console.log(product.productName)
+        console.log(product.productName);
         alert("Product could not be updated. Please try again.");
         console.log(error);
       });
@@ -56,7 +56,10 @@ const AdminUpdateProduct = (props) => {
 
   return (
     <>
-      <button className="btn btn-secondary" onClick={handleShow}>
+      <button
+        className="btn btn-primary w-100 fw-bold mt-2"
+        onClick={handleShow}
+      >
         Update
       </button>
 
@@ -69,6 +72,7 @@ const AdminUpdateProduct = (props) => {
             <div>
               <label> Product Name </label>
               <input
+                required
                 value={form.productName}
                 onChange={(e) => {
                   setForm({
@@ -81,6 +85,7 @@ const AdminUpdateProduct = (props) => {
             <div>
               <label> Price </label>
               <input
+                required
                 value={form.price}
                 onChange={(e) => {
                   setForm({
