@@ -7,6 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+import org.springframework.core.io.Resource;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 import java.util.List;
@@ -29,11 +38,38 @@ public class ProductsController {
         return productsRepository.findByProductID(productID);
     }
 
+    /*
+    @GetMapping({"/{ticketId}/comment/{commentNumber}", ""})
+    public ResponseEntity getTicketComment(@PathVariable(name = "ticketId") Long ticketId, @PathVariable(name = "commentNumber") Long commentNum){
+    */
 
+    @PostMapping(path = "/admin/add/{name}/{price}/{stock}")
+    public String newProduct (@RequestParam("image") MultipartFile file,
+                              @PathVariable(name = "name") String name,
+                              @PathVariable(name = "price") Double price,
+                              @PathVariable(name = "stock") Integer stock) throws IOException{
 
-    @PostMapping(path = "/admin", consumes = {"application/json"})
-    public Products newProduct(@Validated @RequestBody Products products){
-        return productsRepository.save(products);
+        // Create product instance
+        Products product = new Products();
+
+        // Create path to send to database
+        String imagePath = "/" + file.getOriginalFilename();
+
+        // Save image
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get("../frontend/public/" + file.getOriginalFilename());
+        Files.write(path, bytes);
+
+        // Set Data
+        product.setProductName(name);
+        product.setPrice(price);
+        product.setStock(stock);
+        product.setImage(imagePath);
+
+        productsRepository.save(product);
+
+        // Save to database
+        return "Success";
     }
 
     //get product by id
