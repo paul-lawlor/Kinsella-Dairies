@@ -27,7 +27,7 @@ export default function Basket(props) {
   const ORDER_REST_API_URL =
     "http://localhost:5000/orders/" + localStorage.getItem("userId");
 
-    const placeOrder = async () => {
+    const placeOrder = () => {
       //const json = localStorage.getItem('basket')
       let id = localStorage.getItem("userId");
       let items = localStorage.getItem("basket");
