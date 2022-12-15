@@ -7,7 +7,6 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 const AdminCreateProduct = () => {
-  const ADMIN_REST_API_URL = "http://localhost:5000/admin";
 
   const poundFormatter = new Intl.NumberFormat("en-UK", {
     maximumFractionDigits: 2,
@@ -25,9 +24,11 @@ const AdminCreateProduct = () => {
   const [form, setForm] = useState({
     productName: "",
     price: "",
-    image: "",
     stock: "",
   });
+
+  // useState for image
+  const [image, setImage] = useState(null);
 
   // useStaet for price
   const [formPrice, setFormPrice] = useState(0);
@@ -36,19 +37,15 @@ const AdminCreateProduct = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    let json = form;
+    // Create image body data
+    let bodyFormData = new FormData();
+    bodyFormData.append('image',image);
 
-    // If no image is supplied, use a default image
-    if (json.image === "") {
-      json.image =
-        "https://cdn-icons-png.flaticon.com/512/1250/1250555.png?w=1380&t=st=1669718137~exp=1669718737~hmac=8a9d31782292a7ad864eefb9c7994095988d8024811d3c5d388ec874f561ed44";
-    }
-
-    json = JSON.stringify(json);
+    const CREATE_API_URL = `http://localhost:5000/admin/add/${form.productName}/${form.price}/${form.stock}`;
 
     await axios
-      .post(ADMIN_REST_API_URL, json, {
-        headers: { "Content-Type": "application/json" },
+      .post(CREATE_API_URL, bodyFormData, {
+        headers: { "Content-Type": "multipart/form-data" },
       })
       .then(function (response) {
         alert("You have addded a new product!");
@@ -60,9 +57,10 @@ const AdminCreateProduct = () => {
     setForm({
       productName: "",
       price: "",
-      image: "",
       stock: "",
     });
+
+    setImage(null);
 
     handleClose();
   };
@@ -117,14 +115,13 @@ const AdminCreateProduct = () => {
               />
             </div>
             <div>
-              <label> Image URL </label>
+              <label> Image </label>
               <input
-                value={form.image}
+                required
+                type="file"
+                accept="image/*"
                 onChange={(e) => {
-                  setForm({
-                    ...form,
-                    image: e.target.value,
-                  });
+                  setImage(e.target.files[0]);
                 }}
               />
             </div>

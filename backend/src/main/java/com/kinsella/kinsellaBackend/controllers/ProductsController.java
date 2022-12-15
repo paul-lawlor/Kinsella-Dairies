@@ -53,11 +53,11 @@ public class ProductsController {
         Products product = new Products();
 
         // Create path to send to database
-        String imagePath = "/" + file.getOriginalFilename();
+        String imagePath = "/productImages/" + file.getOriginalFilename();
 
         // Save image
         byte[] bytes = file.getBytes();
-        Path path = Paths.get("../frontend/public/" + file.getOriginalFilename());
+        Path path = Paths.get("../frontend/public/productImages/" + file.getOriginalFilename());
         Files.write(path, bytes);
 
         // Set Data
@@ -66,6 +66,7 @@ public class ProductsController {
         product.setStock(stock);
         product.setImage(imagePath);
 
+        // Save product to database
         productsRepository.save(product);
 
         // Save to database
@@ -73,9 +74,30 @@ public class ProductsController {
     }
 
     //get product by id
-    @PutMapping("/admin/{productID}")
-    public Products updateProduct(@PathVariable Long productID, @Validated @RequestBody Products productRequest) {
-        return productsRepository.findById(productID).map(product -> {
+    @PutMapping("/admin/{id}/{name}/{price}")
+    public Products updateProduct(@RequestParam("image") MultipartFile file,
+                                  @PathVariable(name = "id") Long id,
+                                  @PathVariable(name = "name") String name,
+                                  @PathVariable(name = "price") Double price) throws IOException {
+
+        // Create new productRequest instance
+        Products productRequest = new Products();
+
+        // Create path to send to database
+        String imagePath = "/productImages/" + file.getOriginalFilename();
+
+        // Save image
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get("../frontend/public/productImages/" + file.getOriginalFilename());
+        Files.write(path, bytes);
+
+        // Assign Values
+        productRequest.setProductName(name);
+        productRequest.setPrice(price);
+        productRequest.setImage(imagePath);
+
+        // Attempt to update if values arent null
+        return productsRepository.findById(id).map(product -> {
             if (productRequest.getProductName() != null) {
                 product.setProductName(productRequest.getProductName());
             }
@@ -86,7 +108,7 @@ public class ProductsController {
                 product.setImage(productRequest.getImage());
             }
             return productsRepository.save(product);
-        }).orElseThrow(() -> new EntityNotFoundException("No product found with ID " + productID));
+        }).orElseThrow(() -> new EntityNotFoundException("No product found with ID " + id));
     }
 
     @PutMapping("/admin/stock/{productID}")
