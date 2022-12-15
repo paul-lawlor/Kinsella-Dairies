@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
+import CryptoJS from "crypto-js";
 
 const PaymentForm = (props) => {
-
   let order = props.order;
   order.type = "Card";
   order = JSON.stringify(order);
@@ -20,16 +20,32 @@ const PaymentForm = (props) => {
     cvv: "",
   });
 
-
-
   //POST of payment data
   const submitForm = async (e) => {
-
-    
     e.preventDefault();
 
-    const json = JSON.stringify(form);
-    console.log(json);
+    //ENCRYPT SENSITIVE DATA BEFORE IT IS SENT TO THE DATABASE
+
+    // let encryptedForm = CryptoJS.AES.encrypt(json, "farmercraig123").toString();
+    // console.log(encryptedForm);
+
+    // Encrypt card data
+    const encCardNumber = CryptoJS.AES.encrypt(form.cardNumber, "farmercraig123").toString();
+    const encExpiry = CryptoJS.AES.encrypt(form.expiry, "farmercraig123").toString();
+    const encCvv = CryptoJS.AES.encrypt(form.cvv, "farmercraig123").toString();
+
+    // Stringify encrypted data to be sent
+    const json = JSON.stringify({
+      cardNumber: encCardNumber,
+      expiry: encExpiry,
+      cvv: encCvv
+    });
+
+    /* Decryption code
+    let bytes = CryptoJS.AES.decrypt(encryptedForm, "farmercraig123");
+    let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    console.log(decryptedData);
+    */
 
     await axios
       .post(PAYMENT_REST_API_URL, json, {
@@ -53,12 +69,13 @@ const PaymentForm = (props) => {
     console.log(props.order);
 
     //POST of order data
-    await axios.post(ORDER_REST_API_URL, order, {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
+    await axios
+      .post(ORDER_REST_API_URL, order, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
       .then(function (response) {
         console.log(response);
         alert("Your order has been placed.");
@@ -71,8 +88,6 @@ const PaymentForm = (props) => {
         alert(error);
       });
   };
-
-
 
   return (
     <div>

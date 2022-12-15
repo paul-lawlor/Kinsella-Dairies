@@ -13,7 +13,7 @@ export default function Basket(props) {
 
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
-  const [basket, setBasket] = useState([]);
+  const [basket, setBasket] = useState(() => JSON.parse(localStorage.getItem("basket")));
   const [paying, setPaying] = useState(false);
   const [order, setOrder] = useState({});
   const [cardPayment, setCardPayment] = useState(false);
@@ -79,7 +79,6 @@ export default function Basket(props) {
     //indicates that user is paying by card
     setCardPayment(true);
 
-    console.log(cardPayment);
   }
 
 
