@@ -9,7 +9,7 @@ import PaymentForm from "./PaymentForm";
 const DELIVERY_FEE = 1;
 
 export default function Basket(props) {
-  let orderData = JSON.stringify(props.order);
+  const orderData = JSON.stringify(props.order);
 
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
@@ -27,10 +27,10 @@ export default function Basket(props) {
   const ORDER_REST_API_URL =
     "http://localhost:5000/orders/" + localStorage.getItem("userId");
 
-    const placeOrder = async () => {
+    const placeOrder = () => {
       //const json = localStorage.getItem('basket')
-      let id = localStorage.getItem("userId");
-      let items = localStorage.getItem("basket");
+      const id = localStorage.getItem("userId");
+      const items = localStorage.getItem("basket");
   
       console.log(total);
   
@@ -42,10 +42,9 @@ export default function Basket(props) {
       });
   
       if (localStorage.getItem("userOrder") === "true") {
-        alert(
+        return alert(
           "You have already placed an order. Please cancel it before making a new one."
         );
-        return;
       }
   
       setPaying(true);
