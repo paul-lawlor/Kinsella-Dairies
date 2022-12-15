@@ -88,7 +88,7 @@ const Order = () => {
           ))}
           <p className="mt-1 pt-2">Delivery Fee: £{delivery.toFixed(2)}</p>
           <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
-          <p>Payment method: Cash</p>
+          <p>Payment method: {data.type}</p>
           <div className="d-flex flex-column m-2">
             <small className="finePrint mb-1">
               You must cancel 3 days before your next order, otherwise you will

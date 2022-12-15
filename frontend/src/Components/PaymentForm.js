@@ -4,7 +4,10 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const PaymentForm = (props) => {
-  let order = JSON.stringify(props.order);
+
+  let order = props.order;
+  order.type = "Card";
+  order = JSON.stringify(order);
 
   const navigate = useNavigate();
   const PAYMENT_REST_API_URL = "http://localhost:5000/payments";
@@ -16,6 +19,34 @@ const PaymentForm = (props) => {
     expiry: "",
     cvv: "",
   });
+
+
+
+  //POST of payment data
+  const submitForm = async (e) => {
+
+    
+    e.preventDefault();
+
+    const json = JSON.stringify(form);
+    console.log(json);
+
+    await axios
+      .post(PAYMENT_REST_API_URL, json, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        submitOrder();
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("Invalid data entered, please try again.");
+      });
+  };
 
   //POST order
   const submitOrder = async (e) => {
@@ -41,29 +72,7 @@ const PaymentForm = (props) => {
       });
   };
 
-  //POST of payment data
-  const submitForm = async (e) => {
-    e.preventDefault();
 
-    const json = JSON.stringify(form);
-    console.log(json);
-
-    await axios
-      .post(PAYMENT_REST_API_URL, json, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        submitOrder();
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert("Invalid data entered, please try again.");
-      });
-  };
 
   return (
     <div>

@@ -8,7 +8,6 @@ import Home from "./Pages/Home";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import Account from "./Pages/Account";
-import Payment from "./Pages/Payment"
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -37,7 +36,6 @@ export default function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="accounts" element={<Account />} />
             <Route path="orders" element={<Order />} />
-            <Route path="payment" element={<Payment />} />
           </Route>
         </Routes>
       </BrowserRouter>
