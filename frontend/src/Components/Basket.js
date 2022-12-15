@@ -5,6 +5,7 @@ import ProductList from "./ProductList";
 import BasketItem from "./BasketItem";
 import ShopService from "../Services/ShopService";
 import PaymentForm from "./PaymentForm";
+import { BackspaceReverse } from "react-bootstrap-icons";
 
 const DELIVERY_FEE = 1;
 
@@ -13,7 +14,7 @@ export default function Basket(props) {
 
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
-  const [basket, setBasket] = useState(() => JSON.parse(localStorage.getItem("basket")));
+  const [basket, setBasket] = useState([]);
   const [paying, setPaying] = useState(false);
   const [order, setOrder] = useState({});
   const [cardPayment, setCardPayment] = useState(false);
@@ -80,9 +81,8 @@ export default function Basket(props) {
 
   }
 
-
-
   //delivery fee
+  console.log(basket);
   const total = basket.reduce(
     (acc, item) => acc + item.price * item.quantity,
     DELIVERY_FEE
@@ -98,7 +98,7 @@ export default function Basket(props) {
         <p className="mt-1 pt-2">Delivery Fee: £{DELIVERY_FEE.toFixed(2)}</p>
         <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
         <button
-          className="basket-button btn btn-secondary"
+          className="basket-button btn btn-primary"
           onClick={() => {
             placeOrder();
           }}
@@ -130,18 +130,19 @@ export default function Basket(props) {
       <aside className="block cart m-5 col-1 d-flex flex-column justify-content-start align-middle shadow-sm">
         <h2> Please select a payment option </h2>
         <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
+        <div>
+          <button onClick={submitOrder} className="paymentoption">CASH</button>{" "}
+          <button onClick={handlePayment} className="paymentoption">CARD</button>
+        </div>
         <button
           onClick={() => {
             setPaying(false);
             setCardPayment(false);
           }}
+          className="btn btn-danger danger"
         >
           Cancel
         </button>
-        <div>
-          <button onClick={submitOrder}>CASH</button>{" "}
-          <button onClick={handlePayment}>CARD</button>
-        </div>
       </aside>
     );
   } else {

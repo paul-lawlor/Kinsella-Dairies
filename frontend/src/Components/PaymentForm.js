@@ -91,7 +91,7 @@ const PaymentForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={submitForm}>
+      <form className="" onSubmit={submitForm}>
         <div>
           <label>Card Number</label>
           <input
@@ -131,7 +131,7 @@ const PaymentForm = (props) => {
           />
         </div>
 
-        <button type="submit"> Submit Form</button>
+        <button className="btn btn-success" type="submit"> Submit Form</button>
       </form>
     </div>
   );

@@ -95,7 +95,7 @@ const ProductList = () => {
                 <h5> {products.productName}</h5>
                 <img className="pimage rounded-2" src ={products.image}></img>
                 <h6> £{products.price}</h6>
-                <button className="btn btn-secondary" onClick={() => addToBasket(products)}>Add to Cart</button>
+                <button className="btn btn-success" onClick={() => addToBasket(products)}>Add to Cart</button>
               </div>
             ))}
       </div>

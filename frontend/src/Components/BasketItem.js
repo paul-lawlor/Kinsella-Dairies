@@ -60,7 +60,7 @@ const BasketItem = ({ product, basket, setBasket }) => {
         -{" "}
       </button>
       <button
-        className="btn btn-secondary m-1"
+        className="btn btn-success m-1"
         onClick={() => {
           console.log("add");
           addItem(productName);
