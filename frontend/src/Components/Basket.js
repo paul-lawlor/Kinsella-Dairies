@@ -9,7 +9,7 @@ import PaymentForm from "./PaymentForm";
 const DELIVERY_FEE = 1;
 
 export default function Basket(props) {
-  let orderData = JSON.stringify(props.order);
+  const orderData = JSON.stringify(props.order);
 
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
