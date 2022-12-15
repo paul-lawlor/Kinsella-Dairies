@@ -44,9 +44,9 @@ const Admin = () => {
               <AdminDeleteProduct productID={products.productID} />
             </div>
             <img className="pimage rounded-2 mb-2" src={products.image}></img>
-            <h6> £{products.price.toFixed(2)}</h6>
+            <p> £{products.price.toFixed(2)}</p>
             <div className="d-flex justify-content-between align-items-center rounded-2 my-1">
-              <h6>In Stock: {products.stock}</h6>
+              <p>In Stock: {products.stock}</p>
               <StockManagement product={products} />
             </div>
             <AdminUpdateProduct product={products} />

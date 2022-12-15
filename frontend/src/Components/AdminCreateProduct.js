@@ -40,11 +40,14 @@ const AdminCreateProduct = () => {
     // Create image body data
     let bodyFormData = new FormData();
     bodyFormData.append('image',image);
+    bodyFormData.append('name',form.productName);
+    bodyFormData.append('price',form.price);
+    bodyFormData.append('stock',form.stock);
 
-    const CREATE_API_URL = `http://localhost:5000/admin/add/${form.productName}/${form.price}/${form.stock}`;
+    const CREATE_PRODUCT_API_URL = "http://localhost:5000/admin/add";
 
     await axios
-      .post(CREATE_API_URL, bodyFormData, {
+      .post(CREATE_PRODUCT_API_URL, bodyFormData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then(function (response) {
