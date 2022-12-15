@@ -29,8 +29,8 @@ export default function Basket(props) {
 
     const placeOrder = () => {
       //const json = localStorage.getItem('basket')
-      let id = localStorage.getItem("userId");
-      let items = localStorage.getItem("basket");
+      const id = localStorage.getItem("userId");
+      const items = localStorage.getItem("basket");
   
       console.log(total);
   
