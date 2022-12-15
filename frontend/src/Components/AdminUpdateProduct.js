@@ -9,8 +9,6 @@ import axios from "axios";
 const AdminUpdateProduct = (props) => {
   const product = props.product;
 
-  const ADMIN_REST_API_URL = "http://localhost:5000/admin/" + product.productID;
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -29,13 +27,17 @@ const AdminUpdateProduct = (props) => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const UPDATE_REST_API_URL = ADMIN_REST_API_URL + `/${form.productName}/${form.price}`
+    const UPDATE_REST_API_URL = "http://localhost:5000/admin/update"
 
     // Create image body data
     let bodyFormData = new FormData();
     bodyFormData.append('image',image);
+    bodyFormData.append('id',product.productID);
+    bodyFormData.append('name',form.productName);
+    bodyFormData.append('price',form.price);
 
-    axios
+    // Update Request
+    await axios
       .put(UPDATE_REST_API_URL, bodyFormData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -82,7 +84,7 @@ const AdminUpdateProduct = (props) => {
               />
             </div>
             <div>
-              <label> Price </label>
+            <label> Price </label>
               <input
                 required
                 value={form.price}
@@ -97,8 +99,9 @@ const AdminUpdateProduct = (props) => {
                 }}
               />
               </div>
-              <div>
-              <label> Image </label>
+            <div>
+            <label> 
+              Image 
               <input
                 required
                 type="file"
@@ -107,6 +110,7 @@ const AdminUpdateProduct = (props) => {
                   setImage(e.target.files[0]);
                 }}
               />
+            </label>
             </div>
             <div>
             </div>

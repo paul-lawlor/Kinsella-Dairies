@@ -38,16 +38,11 @@ public class ProductsController {
         return productsRepository.findByProductID(productID);
     }
 
-    /*
-    @GetMapping({"/{ticketId}/comment/{commentNumber}", ""})
-    public ResponseEntity getTicketComment(@PathVariable(name = "ticketId") Long ticketId, @PathVariable(name = "commentNumber") Long commentNum){
-    */
-
-    @PostMapping(path = "/admin/add/{name}/{price}/{stock}")
+    @PostMapping(path = "/admin/add")
     public String newProduct (@RequestParam("image") MultipartFile file,
-                              @PathVariable(name = "name") String name,
-                              @PathVariable(name = "price") Double price,
-                              @PathVariable(name = "stock") Integer stock) throws IOException{
+                              @RequestParam("name") String name,
+                              @RequestParam("price") Double price,
+                              @RequestParam("stock") Integer stock) throws IOException{
 
         // Create product instance
         Products product = new Products();
@@ -74,11 +69,11 @@ public class ProductsController {
     }
 
     //get product by id
-    @PutMapping("/admin/{id}/{name}/{price}")
+    @PutMapping("/admin/update")
     public Products updateProduct(@RequestParam("image") MultipartFile file,
-                                  @PathVariable(name = "id") Long id,
-                                  @PathVariable(name = "name") String name,
-                                  @PathVariable(name = "price") Double price) throws IOException {
+                                  @RequestParam("id") Long id,
+                                  @RequestParam("name") String name,
+                                  @RequestParam("price") Double price) throws IOException {
 
         // Create new productRequest instance
         Products productRequest = new Products();
