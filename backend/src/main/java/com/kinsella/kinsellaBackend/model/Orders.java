@@ -26,10 +26,6 @@ public class Orders {
         @Column(name = "userID")
         private String userID;
 
-//        @ManyToOne
-//        @JoinColumn(name = "userID", referencedColumnName = "userID")
-//        private Accounts userID;
-
         @Column(
                 name = "items",
                 columnDefinition = "TEXT",
@@ -37,9 +33,7 @@ public class Orders {
         )
         private String items;
 
-//        @OneToMany
-//        @JoinColumn(name = "productOrderID")
-//        private List<OrderProduct> productOrderID;
-
+        @Column (name= "type")
+        private String type;
     
 }
