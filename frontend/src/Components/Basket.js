@@ -4,57 +4,63 @@ import { useNavigate } from "react-router-dom";
 import ProductList from "./ProductList";
 import BasketItem from "./BasketItem";
 import ShopService from "../Services/ShopService";
+import PaymentForm from "./PaymentForm";
 
 const DELIVERY_FEE = 1;
 
-export default function Basket() {
+export default function Basket(props) {
+  const orderData = JSON.stringify(props.order);
+
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
-  const [basket, setBasket] = useState([])
+  const [basket, setBasket] = useState(() => JSON.parse(localStorage.getItem("basket")));
+  const [paying, setPaying] = useState(false);
+  const [order, setOrder] = useState({});
+  const [cardPayment, setCardPayment] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem('basket') !== null) {
-        setBasket(JSON.parse(localStorage.getItem("basket")))
+    if (localStorage.getItem("basket") !== null) {
+      setBasket(JSON.parse(localStorage.getItem("basket")));
     }
-  }, [])
+  }, []);
 
-  // let basketItems = [];
+  const ORDER_REST_API_URL =
+    "http://localhost:5000/orders/" + localStorage.getItem("userId");
 
-  // if (localStorage.getItem("basket") !== null) {
-  //   let itemCount = JSON.parse(localStorage.getItem("basket")).length;
-
-  //   for (let i = 0; i < itemCount; i++) {
-  //     let currentItem = JSON.parse(localStorage.getItem("basket"))[i];
-  //     basketItems.push(<BasketItem product={currentItem} index={i} />);
-  //     total += currentItem.price * currentItem.quantity;
-  //   }
-  // }
-
-  const placeOrder = async () => {
-    //const json = localStorage.getItem('basket')
-    let id = localStorage.getItem("userId");
-    let items = localStorage.getItem("basket");
-
-    console.log(total)
-
-    const apiUrl = "http://localhost:5000/orders/" + id;
-
-    let order = {
-      totalPrice: total,
-      userID: id,
-      items: items,
+    const placeOrder = () => {
+      //const json = localStorage.getItem('basket')
+      const id = localStorage.getItem("userId");
+      const items = localStorage.getItem("basket");
+  
+      console.log(total);
+  
+      setOrder({
+        totalPrice: total,
+        userID: id,
+        items: items,
+        type: "Cash"
+      });
+  
+      if (localStorage.getItem("userOrder") === "true") {
+        return alert(
+          "You have already placed an order. Please cancel it before making a new one."
+        );
+      }
+  
+      setPaying(true);
     };
 
-    if (localStorage.getItem("userOrder") === "true") {
-      alert(
-        "You have already placed an order. Please cancel it before making a new one."
-      );
-      return;
-    }
 
-    //post request which transfers the data
+
+  const submitOrder = async (e) => {
+    //POST of order data
     await axios
-      .post(apiUrl, order)
+      .post(ORDER_REST_API_URL, order, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
       .then(function (response) {
         console.log(response);
         alert("Your order has been placed.");
@@ -64,8 +70,17 @@ export default function Basket() {
       })
       .catch(function (error) {
         console.log(error);
+        alert(error);
       });
   };
+
+  function handlePayment() {
+    //indicates that user is paying by card
+    setCardPayment(true);
+
+  }
+
+
 
   //delivery fee
   const total = basket.reduce(
@@ -73,9 +88,9 @@ export default function Basket() {
     DELIVERY_FEE
   );
 
-  if (basket.length) {
+  if (basket.length && paying == false) {
     return (
-      <aside className="block cart m-5 col-1 d-flex flex-column justify-content-between align-middle shadow-sm">
+      <aside className="block cart m-5 col-1 d-flex flex-column justify-content-start align-middle shadow-sm">
         <h2>Basket</h2>
         {basket.map((item) => (
           <BasketItem product={item} basket={basket} setBasket={setBasket} />
@@ -84,15 +99,54 @@ export default function Basket() {
         <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
         <button
           className="basket-button btn btn-secondary"
-          onClick={() => placeOrder()}
+          onClick={() => {
+            placeOrder();
+          }}
         >
           Place Order
         </button>
       </aside>
     );
+    // When an order is being paid
+  } else if (basket.length && cardPayment === true && paying === true) {
+    return (
+      <aside className="block cart m-5 col-1 d-flex flex-column justify-content-start align-middle shadow-sm">
+        <h2>Payment</h2>
+
+        <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
+        <button
+          onClick={() => {
+            setPaying(false);
+            setCardPayment(false);
+          }}
+        >
+          Cancel
+        </button>
+        <PaymentForm order={order} />
+      </aside>
+    );
+  } else if (basket.length && paying === true) {
+    return (
+      <aside className="block cart m-5 col-1 d-flex flex-column justify-content-start align-middle shadow-sm">
+        <h2> Please select a payment option </h2>
+        <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
+        <button
+          onClick={() => {
+            setPaying(false);
+            setCardPayment(false);
+          }}
+        >
+          Cancel
+        </button>
+        <div>
+          <button onClick={submitOrder}>CASH</button>{" "}
+          <button onClick={handlePayment}>CARD</button>
+        </div>
+      </aside>
+    );
   } else {
     return (
-      <aside className="block cart m-5 col-1 d-flex flex-column justify-content-between align-middle shadow-sm">
+      <aside className="block cart m-5 col-1 d-flex flex-column justify-content-start align-middle shadow-sm">
         <h2>Basket</h2>
         <p className="mt-1 pt-2">Your basket is empty</p>
       </aside>

@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import AccountService from "../Services/AccountService";
 import confused from "../Images/confused.png";
+import CryptoJS from "crypto-js";
 
 const AccountMangement = () => {
   // Defining API URL for later use when targeting the 'accounts' endpoint
@@ -75,6 +76,10 @@ const AccountMangement = () => {
         </>
       );
     }
+
+    // Decryption code
+    let bytes = CryptoJS.AES.decrypt(data[0].password, "farmercraig123");
+    let decryptedPassword = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
     return (
       //if user is logged in, with no errors
@@ -170,7 +175,7 @@ const AccountMangement = () => {
           <div className="password d-flex flex-column p-3 m-1">
             <label>Password</label>
             <input
-              defaultValue={data[0].password}
+              defaultValue={decryptedPassword}
               type="password"
               onChange={(e) => {
                 setForm({
@@ -204,7 +209,22 @@ const AccountMangement = () => {
   //when update button is pressed, POST request submits form details
   const confirmDetails = async (e) => {
     e.preventDefault();
-    const json = JSON.stringify(form);
+    
+    // Encrypt password
+    let encPassword = CryptoJS.AES.encrypt(
+      form.password,
+      "farmercraig123"
+    ).toString();
+
+    const json = JSON.stringify({
+      firstName: form.firstName,
+      lastName: form.lastName,
+      phoneNumber: form.phoneNumber,
+      addressLineOne: form.addressLineOne,
+      addressLineTwo: form.addressLineTwo,
+      postcode: form.postcode,
+      password: encPassword,
+    });
 
     axios
       .put(ACCOUNT_REST_API_URL, json, {

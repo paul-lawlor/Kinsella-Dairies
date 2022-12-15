@@ -1,0 +1,13 @@
+<aside className="block cart m-5 col-1 d-flex flex-column justify-content-start align-middle shadow-sm">
+        <h2>Payment</h2>
+        <p className="mt-1 pt-2">Delivery Fee: £{DELIVERY_FEE.toFixed(2)}</p>
+        <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
+        <button
+          onClick={() => {
+            setPaying(false);
+          }}
+        >
+          Cancel
+        </button>
+        <PaymentForm order={order} />
+      </aside>
