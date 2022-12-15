@@ -42,10 +42,9 @@ export default function Basket(props) {
       });
   
       if (localStorage.getItem("userOrder") === "true") {
-        alert(
+        return alert(
           "You have already placed an order. Please cancel it before making a new one."
         );
-        return;
       }
   
       setPaying(true);
