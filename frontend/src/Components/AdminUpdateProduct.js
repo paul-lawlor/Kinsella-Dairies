@@ -20,25 +20,24 @@ const AdminUpdateProduct = (props) => {
   const [form, setForm] = useState({
     productName: product.productName,
     price: product.price,
-    image: product.image,
   });
+
+  // useState for Image
+  const [image, setImage] = useState(null);
 
   //function which submits the form
   const submitForm = async (e) => {
-    let json = form;
+    e.preventDefault();
 
-    // If no image is supplied, use a default image
-    if (json.image === "") {
-      json.image =
-        "https://cdn-icons-png.flaticon.com/512/1250/1250555.png?w=1380&t=st=1669718137~exp=1669718737~hmac=8a9d31782292a7ad864eefb9c7994095988d8024811d3c5d388ec874f561ed44";
-    }
+    const UPDATE_REST_API_URL = ADMIN_REST_API_URL + `/${form.productName}/${form.price}`
 
-    console.log(props.product);
-    json = JSON.stringify(json);
+    // Create image body data
+    let bodyFormData = new FormData();
+    bodyFormData.append('image',image);
 
     axios
-      .put(ADMIN_REST_API_URL, json, {
-        headers: { "Content-Type": "application/json" },
+      .put(UPDATE_REST_API_URL, bodyFormData, {
+        headers: { "Content-Type": "multipart/form-data" },
       })
       .then(function (response) {
         console.log(response);
@@ -63,7 +62,7 @@ const AdminUpdateProduct = (props) => {
         Update
       </button>
 
-      <Modal style={{ opacity: 1 }} show={show} onHide={handleClose}>
+      <Modal style={{ opacity: 1 }} animation={false} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title id="ModalHeader">Update Product</Modal.Title>
         </Modal.Header>
@@ -87,6 +86,9 @@ const AdminUpdateProduct = (props) => {
               <input
                 required
                 value={form.price}
+                type="number"
+                min="0"
+                step="0.01"
                 onChange={(e) => {
                   setForm({
                     ...form,
@@ -94,18 +96,19 @@ const AdminUpdateProduct = (props) => {
                   });
                 }}
               />
-            </div>
-            <div>
-              <label> Image URL </label>
+              </div>
+              <div>
+              <label> Image </label>
               <input
-                value={form.image}
+                required
+                type="file"
+                accept="image/*"
                 onChange={(e) => {
-                  setForm({
-                    ...form,
-                    image: e.target.value,
-                  });
+                  setImage(e.target.files[0]);
                 }}
               />
+            </div>
+            <div>
             </div>
           </Modal.Body>
           <Modal.Footer>

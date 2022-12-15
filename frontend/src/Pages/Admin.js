@@ -22,7 +22,7 @@ const Admin = () => {
   if (isLoading) return "Loading...";
 
   // we need to change this error!
-  if (!data?.[0] || error) {
+  if (error) {
     return (
       <ErrorMessage
         title="Whoops! There's a problem with our Shop page at the moment..."
@@ -44,7 +44,7 @@ const Admin = () => {
               <AdminDeleteProduct productID={products.productID} />
             </div>
             <img className="pimage rounded-2 mb-2" src={products.image}></img>
-            <h6> £{products.price}</h6>
+            <h6> £{products.price.toFixed(2)}</h6>
             <div className="d-flex justify-content-between align-items-center rounded-2 my-1">
               <h6>In Stock: {products.stock}</h6>
               <StockManagement product={products} />
