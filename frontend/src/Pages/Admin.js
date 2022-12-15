@@ -22,7 +22,7 @@ const Admin = () => {
   if (isLoading) return "Loading...";
 
   // we need to change this error!
-  if (!data?.[0] && error) {
+  if (error) {
     return (
       <ErrorMessage
         title="Whoops! There's a problem with our Shop page at the moment..."
