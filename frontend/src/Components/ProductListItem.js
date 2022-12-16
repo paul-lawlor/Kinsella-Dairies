@@ -66,7 +66,7 @@ const addToBasket = (products) => {
           >
             <h5> {products.productName}</h5>
             <img className="pimage rounded-2" src={products.image}></img>
-            <h6> £{products.price}</h6>
+            <h6> £{products.price.toFixed(2)}</h6>
             <h6> In stock: {products.stock}</h6>
             <button
               className="btn btn-secondary"

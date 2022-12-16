@@ -71,7 +71,7 @@ const AdminUpdateProduct = (props) => {
         <form onSubmit={submitForm}>
           <Modal.Body>
             <div>
-              <label> Product Name </label>
+            <label className="d-flex flex-column m-2"> Product Name 
               <input
                 required
                 value={form.productName}
@@ -82,9 +82,10 @@ const AdminUpdateProduct = (props) => {
                   });
                 }}
               />
+              </label>
             </div>
             <div>
-            <label> Price </label>
+              <label className="d-flex flex-column m-2 w-25"> Price 
               <input
                 required
                 value={form.price}
@@ -98,10 +99,11 @@ const AdminUpdateProduct = (props) => {
                   });
                 }}
               />
-              </div>
+              </label>
+            </div>
             <div>
-            <label> 
-              Image 
+              <label className="d-flex flex-column m-2"> Image 
+              <p className="text-secondary">(Drag and drop or select a file)</p>
               <input
                 required
                 type="file"
@@ -111,8 +113,6 @@ const AdminUpdateProduct = (props) => {
                 }}
               />
             </label>
-            </div>
-            <div>
             </div>
           </Modal.Body>
           <Modal.Footer>

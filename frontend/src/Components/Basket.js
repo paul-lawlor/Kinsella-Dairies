@@ -119,7 +119,7 @@ export default function Basket(props) {
 
   if (basket.length && paying == false) {
     return (
-      <aside className="block cart m-5 col-1 d-flex flex-column justify-content-start align-middle shadow-sm">
+      <aside className="block cart m-5 col-1 d-flex w-50 flex-column justify-content-start align-middle shadow-sm">
         <h2>Basket</h2>
         {basket.map((item) => (
           <BasketItem product={item} basket={basket} setBasket={setBasket} />
@@ -144,6 +144,7 @@ export default function Basket(props) {
 
         <b className="mb-1 pb-2">Total: £{total.toFixed(2)}</b>
         <button
+          className="btn btn-danger"
           onClick={() => {
             setPaying(false);
             setCardPayment(false);

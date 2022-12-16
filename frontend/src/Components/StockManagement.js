@@ -55,8 +55,9 @@ const StockManagement = (props) => {
         <form onSubmit={submitForm}>
           <Modal.Body>
             <div>
-              <label> Stock Level </label>
+              <label className="d-flex flex-column m-2"> Stock Level 
               <input
+                className="w-25 my-1"
                 value={form.stock}
                 onChange={(e) => {
                   setForm({
@@ -64,6 +65,7 @@ const StockManagement = (props) => {
                   });
                 }}
               />
+              </label>
             </div>
           </Modal.Body>
           <Modal.Footer>

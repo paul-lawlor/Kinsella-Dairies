@@ -89,7 +89,7 @@ const AdminCreateProduct = () => {
         <form onSubmit={submitForm}>
           <Modal.Body>
             <div>
-              <label> Product Name </label>
+            <label className="d-flex flex-column m-2"> Product Name 
               <input
                 required
                 value={form.productName}
@@ -100,9 +100,10 @@ const AdminCreateProduct = () => {
                   });
                 }}
               />
+              </label>
             </div>
             <div>
-              <label> Price </label>
+              <label className="d-flex flex-column m-2 w-25"> Price 
               <input
                 required
                 value={form.price}
@@ -116,9 +117,11 @@ const AdminCreateProduct = () => {
                   });
                 }}
               />
+              </label>
             </div>
             <div>
-              <label> Image </label>
+              <label className="d-flex flex-column m-2"> Image 
+              <p className="text-secondary">(Drag and drop or select a file)</p>
               <input
                 required
                 type="file"
@@ -127,10 +130,12 @@ const AdminCreateProduct = () => {
                   setImage(e.target.files[0]);
                 }}
               />
+            </label>
             </div>
             <div>
-              <label> Initial Stock Level </label>
+              <label className="d-flex flex-column m-2"> Initial Stock Level 
               <input
+                className="w-25"
                 required
                 value={form.stock}
                 onChange={(e) => {
@@ -140,6 +145,7 @@ const AdminCreateProduct = () => {
                   });
                 }}
               />
+              </label>
             </div>
           </Modal.Body>
           <Modal.Footer>

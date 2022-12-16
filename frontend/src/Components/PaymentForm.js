@@ -91,10 +91,13 @@ const PaymentForm = (props) => {
 
   return (
     <div>
-      <form className="" onSubmit={submitForm}>
+      <form className="form-inline" onSubmit={submitForm}>
         <div>
-          <label>Card Number</label>
+          <label className="d-flex flex-column m-2">Card Number</label>
           <input
+            required
+            minLength="16"
+            maxLength="16"
             value={form.cardNumber}
             onChange={(e) => {
               setForm({
@@ -106,8 +109,10 @@ const PaymentForm = (props) => {
         </div>
 
         <div>
-          <label>Expiry Date</label>
+          <label className="d-flex flex-column m-2">Expiry Date</label>
           <input
+            required
+            type="month"
             value={form.expiry}
             onChange={(e) => {
               setForm({
@@ -119,8 +124,12 @@ const PaymentForm = (props) => {
         </div>
 
         <div>
-          <label>CVV</label>
+          <label className="d-flex flex-column m-2">CVV</label>
           <input
+            required
+            className="w-25 cvv"
+            minLength="3"
+            maxLength="3"
             value={form.cvv}
             onChange={(e) => {
               setForm({
