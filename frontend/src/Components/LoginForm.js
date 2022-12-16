@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import css from "../Pages/App.css";
+import CryptoJS from "crypto-js";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -15,8 +16,21 @@ const LoginForm = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const json = JSON.stringify(form);
-    console.log(form);
+    console.log(form.password)
+
+    // Encrypt password
+    let encPassword = CryptoJS.HmacSHA256(
+      form.password,
+      "farmercraig123"
+    ).toString();
+
+    console.log(encPassword);
+
+    // Stringify to be sent
+    const json = JSON.stringify({
+      phoneNumber: form.phoneNumber,
+      password: encPassword
+    });
 
     axios
       .post(ACCOUNT_REST_API_URL, json, {

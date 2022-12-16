@@ -13,6 +13,7 @@ const AccountMangement = () => {
     "http://localhost:5000/accounts/" + localStorage.getItem("userId");
 
   const nagivate = useNavigate();
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -24,7 +25,18 @@ const AccountMangement = () => {
   });
 
   const getData = () => {
-    const { isLoading, error, data } = useQuery(ACCOUNT_REST_API_URL); //setting query key to accounts endpoint
+    const { isLoading, error, data } = useQuery(ACCOUNT_REST_API_URL, 
+      {onSuccess: (data) => {
+        setForm({
+          firstName: data[0].firstName,
+          lastName: data[0].lastName,
+          phoneNumber: data[0].phoneNumber,
+          addressLineOne: data[0].addressLineOne,
+          addressLineTwo: data[0].addressLineTwo,
+          postcode: data[0].postcode,
+          password: ""
+        })
+      }}); //setting query key to accounts endpoint
 
     if (isLoading) return "Loading...";
 
@@ -61,9 +73,20 @@ const AccountMangement = () => {
       );
     }
 
+    console.log(data[0])
+    // setForm({
+    //   firstName: data[0].firstName,
+    //   lastName: data[0].lastName,
+    //   phoneNumber: data[0].phoneNumber,
+    //   addressLineOne: data[0].addressLineOne,
+    //   addressLineTwo: data[0].addressLineTwo,
+    //   postcode: data[0].postcode,
+    //   password: ""
+    // });
+
     // Decryption code
-    let bytes = CryptoJS.AES.decrypt(data[0].password, "farmercraig123");
-    let decryptedPassword = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    // let bytes = CryptoJS.HmacSHA256(data[0].password, "farmercraig123");
+    // let decryptedPassword = bytes.toString(CryptoJS.enc.Utf8);
 
     return (
       //if user is logged in, with no errors
@@ -159,31 +182,8 @@ const AccountMangement = () => {
           </div>
 
           <div className="password d-flex flex-column p-3 m-1">
-            <label>Password</label>
+            <label>Change Password</label>
             <input
-              defaultValue={data[0].password}
-              type="password"
-              onChange={(e) => {
-                setForm({
-                  ...form,
-                  password: e.target.value,
-                });
-              }}
-            />
-          </div>
-
-          <div className="d-flex align-items-between">
-            <div className="p-3 py-1">
-              <button type="submit" className="btn btn-primary m-1">
-                Update Account Info
-              </button>
-            </div>
-          </div>
-
-          <div className="password d-flex flex-column p-3 m-1">
-            <label>Password</label>
-            <input
-              defaultValue={decryptedPassword}
               type="password"
               onChange={(e) => {
                 setForm({
@@ -218,8 +218,16 @@ const AccountMangement = () => {
   const confirmDetails = async (e) => {
     e.preventDefault();
 
+
+
     // Encrypt password
-    let encPassword = CryptoJS.AES.encrypt(
+    // let encPassword = CryptoJS.AES.encrypt(
+    //   form.password,
+    //   "farmercraig123"
+    // ).toString();
+
+    // Encrypt
+    let encPassword = CryptoJS.HmacSHA256(
       form.password,
       "farmercraig123"
     ).toString();

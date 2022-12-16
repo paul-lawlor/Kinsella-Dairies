@@ -26,7 +26,7 @@ const SignupForm = () => {
     e.preventDefault();
 
     // Encrypt password
-    let encPassword = CryptoJS.AES.encrypt(
+    let encPassword = CryptoJS.HmacSHA256(
       form.password,
       "farmercraig123"
     ).toString();
@@ -39,6 +39,7 @@ const SignupForm = () => {
       addressLineTwo: form.addressLineTwo,
       postcode: form.postcode,
       password: encPassword,
+      admin: form.admin
     });
 
     axios

@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import OrderBasketItem from "../Components/OrderBasketItem";
 import axios from "axios";
 import "./App.css";
+import { useNavigate } from "react-router";
 
 
 const Order = () => {
@@ -11,6 +12,8 @@ const Order = () => {
   const ORDER_REST_API_URL = "http://localhost:5000/orders/" + id;
   const { isLoading, error, data } = useQuery(ORDER_REST_API_URL);
   const [orderData, setOrderData] = useState({});
+
+  const navigate = useNavigate();
 
   let total = 0.0;
 
@@ -21,7 +24,7 @@ const Order = () => {
       axios.delete(orderUrl).then(function (response) {
         alert("Order has been cancelled successfully");
         localStorage.removeItem("userOrder");
-        window.location.reload();
+        navigate("/")
       });
     }
   };
