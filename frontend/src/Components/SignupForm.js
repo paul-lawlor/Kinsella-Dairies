@@ -4,6 +4,7 @@ import axios from "axios";
 import css from "../Pages/App.css";
 import { TextCenter } from "react-bootstrap-icons";
 import { Link, useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -24,8 +25,21 @@ const SignupForm = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const json = JSON.stringify(form);
-    console.log(json);
+    // Encrypt password
+    let encPassword = CryptoJS.AES.encrypt(
+      form.password,
+      "farmercraig123"
+    ).toString();
+
+    const json = JSON.stringify({
+      firstName: form.firstName,
+      lastName: form.lastName,
+      phoneNumber: form.phoneNumber,
+      addressLineOne: form.addressLineOne,
+      addressLineTwo: form.addressLineTwo,
+      postcode: form.postcode,
+      password: encPassword,
+    });
 
     axios
       .post(ACCOUNT_REST_API_URL, json, {
